@@ -1,0 +1,8 @@
+Librerías necesarias:
+pip install streamlit chromadb pymupdf requests
+
+Crear la base de datos de vectores:
+python model.py
+Correr el chatbot (Es necesario tener el servodor de LLMStudio levantado):
+streamlit run app.py
+

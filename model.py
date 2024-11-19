@@ -1,10 +1,11 @@
+# python model.py
 import chromadb
 import fitz  # PyMuPDF para leer PDFs
 import requests
 import os
 import logging
 
-# Rutas para PDFs y base de datos
+ Rutas para PDFs y base de datos
 PDF_FOLDER = "pdf"
 DB_FOLDER = "db"
 BASE_URL = "http://localhost:1234"  # LMStudio está corriendo en este puerto

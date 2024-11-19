@@ -1,3 +1,4 @@
+# streamlit run app.py
 import streamlit as st
 from model import chat_completions
 
@@ -15,15 +16,6 @@ if 'first_message' not in st.session_state:
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
-
-# Mensaje inicial del asistente si es la primera vez que se abre la app
-if st.session_state.first_message:
-    with st.chat_message("assistant"):
-        st.markdown("Hola, en qué puedo ayudarte?")
-    
-    # Añade el mensaje del asistente a la lista de mensajes
-    st.session_state.messages.append({"role": "assistant", "content": "Hola, en qué puedo ayudarte?"})
-    st.session_state.first_message = False
 
 # Entrada de usuario y procesamiento de respuesta del asistente
 if prompt := st.chat_input("Escribe tu mensaje aquí..."):
