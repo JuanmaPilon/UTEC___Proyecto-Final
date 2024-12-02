@@ -24,7 +24,7 @@ if prompt := st.chat_input("Escribe tu mensaje aquí..."):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # Obtiene la respuesta del asistente (con el prompt predefinido ya aplicado en model.py)
+    # Obtiene la respuesta del asistente
     with st.chat_message("assistant"):
         response = chat_completions(st.session_state.messages)
         assistant_response = response.get("choices")[0].get("message").get("content")
