@@ -7,7 +7,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Título de la aplicación
-st.title("Asistente virtual WMS")
+st.title("Asistente virtual WIS")
 
 # Agrega estilo para manejar texto con saltos de línea y botones
 st.markdown(
