@@ -1,0 +1,9 @@
+requests
+chromadb
+sentence-transformers
+numpy
+scikit-learn
+streamlit
+python-docx
+PyPDF2
+
