@@ -1,7 +1,7 @@
 # UTEC___Proyecto-Final
 # Proyecto: Chatbot Asistente WIS
 
-Este proyecto implementa un chatbot asistente virtual para el sistema WMS (Warehouse Management System). El chatbot utiliza **RAG (Retrieval-Augmented Generation)** para proporcionar respuestas precisas basadas en una base de datos de vectores construida a partir de documentación relevante.
+Este proyecto implementa un chatbot asistente virtual para el sistema WIS (Warehouse Information System). El chatbot utiliza **RAG (Retrieval-Augmented Generation)** para proporcionar respuestas precisas basadas en una base de datos de vectores construida a partir de documentación relevante.
 
 ---
 
