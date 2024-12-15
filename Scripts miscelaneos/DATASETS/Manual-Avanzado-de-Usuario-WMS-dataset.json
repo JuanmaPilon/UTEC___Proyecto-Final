@@ -1,0 +1,1134 @@
+[
+    {
+        "role": "system",
+        "content": "Eres un asistente virtual llamado Asistente WMS, enfocado en responder preguntas relacionadas al sistema WMS (Warehouse Management System), de forma concreta y precisa."
+    },
+    {
+        "role": "user",
+        "content": "Generalidades del Manual Avanzado de Usuario WMS 10.0"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGeneralidades:\nEl presente documento tiene como objetivo profundizar en los procesos logísticos más complejos dentro del sistema WMS, centrándose en la optimización de la gestión de depósitos y el dominio de casos de uso avanzados. Está dirigido a usuarios que ya se encuentran familiarizados con los conceptos básicos del sistema presentados en el documento “Manual Básico de Usuario”, proporcionando una visión detallada de flujos operativos avanzados.\nEs importante destacar que los flujos operativos descritos en este manual están orientados específicamente a la gestión de mercadería suelta y no a aquella contenida en LPNs (License Plate Numbers). Para obtener información detallada sobre el mantenimiento y la operativa basada en LPNs, se recomienda consultar el manual 'License Plate Number'.\nLos temas tratados en el manual incluyen:\n    1. Configuración del Sistema:\n    • Ajustes generales del sistema como parámetros, unidades de medida, formatos de fechas y horas, etc.\n    • Definición de dominios y configuración de idiomas.\n    • Personalización de opciones de impresión, incluyendo lenguajes, servidores, impresoras y estilos.\n    • Configuración de la aplicación WIS Tracking.\n    2. Mantenimiento de Datos Maestros: Definición y clasificación de productos, códigos de barras, ubicaciones de picking, preparaciones, equipos y vehículos.\n    3. Administración de bloqueos y sesiones: Manejo de bloqueos operativos y sesiones de usuarios a través de la aplicación Traffic Officer.\n    4. Flujos Operativos Avanzados:\n    • Gestión documental para recepción, sugerencias de almacenamiento y cross-docking.\n    • Gestión de stock, incluyendo las siguientes secciones:\n        ◦ Consultas avanzadas de stock.\n        ◦ Manejo de unidades de transporte.\n        ◦ Cambios de lote y vencimiento.\n        ◦ Manejo de equipos.\n        ◦ Controles de calidad.\n        ◦ Manejo de averías.\n        ◦ Reabastecimiento de ubicaciones.\n        ◦ Módulo de Producción.\n    5. Preparación: Liberación automática de las preparaciones y operaciones avanzadas sobre contenedores.\n    6. Facturación\n    7. Expedición: Descarga de contenedores y panel “Pedidos de Mostrador”.\nCada sección del manual está diseñada para proporcionar una comprensión completa de los procedimientos y herramientas disponibles en el sistema, con el objetivo de capacitar a los usuarios en la realización eficiente de tareas logísticas y optimizar los procesos."
+    },
+    {
+        "role": "user",
+        "content": "Configuración Avanzada del Sistema"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración Avanzada del Sistema:\nEn esta sección se explicarán configuraciones del sistema avanzadas, ya sea por su nivel de dificultad o porque están fuera de la operativa básica del sistema.\nAlgunos de los puntos que se detallan a continuación son: Parámetros del Sistema, Configuración de Idioma, Configuración de Impresión, entre otros."
+    },
+    {
+        "role": "user",
+        "content": "Parámetros del Sistema"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nParámetros del Sistema:\nLos parámetros sirven para configurar comportamientos en las distintas operaciones del sistema.\nPor ejemplo existe el parámetro MODO_CONSULTA que sirve para configurar la carga automática del contenido de las grillas en el panel web. Cuando este parámetro tiene valor S, las grillas no cargan automáticamente su contenido. Para visualizar el contenido de las grillas se deben de actualizar manualmente.\nLos parámetros del sistema tienen una entidad específica para su configuración. Estas entidades parametrizables tienen un orden o jerarquía en el que se aplica la configuración del parámetro, tomándose en cuenta solamente la entidad de mayor nivel que esté configurada.\nLa jerarquía es definida por el valor Nivel asociado a la configuración del parámetro / entidad parametrizable. Cuanto más específica sea la entidad parametrizable, mayor será el número de su nivel en comparación a las demás entidades configuradas para el mismo parámetro.\nA continuación se detallan las entidades parametrizables, ordenadas de la más específica a la más general:\n    1. Usuario: se especifica para los usuarios del sistema y es la entidad con mayor prioridad al momento de aplicar la configuración de un parámetro.\n    2. Predio: se especifica para los predios de una empresa. Es la segunda entidad más específica y los parámetros configurados para un predio son aplicados solamente si no existen los mismos parámetros definidos para el usuario que esté utilizando el sistema.\n    3. Empresa: se especifica para las empresas del sistema. Es la tercera entidad más específica y los parámetros configurados para una empresa son aplicados solamente si no existen los mismos parámetros definidos para el usuario que esté utilizando el sistema o para el predio en que se está trabajando.\n    4. General: se especifica para todo el sistema. Los parámetros configurados para esta entidad son aplicados solamente si no existen los mismos parámetros definidos para entidades de mayor nivel.\nPara configurar un parámetro debe dirigirse al menú Configuración > Parámetros del sistema.\nEn la siguiente captura se aprecia el panel “Parámetros del sistema”, el cual lista todos los parámetros que intervienen en distintas configuraciones del sistema.\nEstando en esta página se debe buscar el parámetro a configurar en la grilla y presionar el botón (tres lineas horizontales) de la línea correspondiente a dicho parámetro. Esta acción despliega un modal como el que se muestra a continuación:\nSe tomará como ejemplo la configuración del parámetro MODO_CONSULTA para la entidad Usuario.\nEn el caso que el usuario no aparezca en la grilla, es decir el número del usuario no aparece en la columna Valor entidad, se debe agregar un nuevo registro para dicho usuario. En el campo valor se deberá ingresar el valor S o N, para generarlo activado o desactivado respectivamente.\nEn caso de que exista un registro para el usuario, simplemente se debe cambiar el campo Valor en la línea correspondiente.\nDe esta misma manera se configuran los parámetros para las demás entidades parametrizables."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Dominios"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Dominios:\nLos dominios sirven para guardar valores que son utilizados en operaciones del sistema.\nAlgunos ejemplos de dominios son:\n    • PARAM_USER: guarda valores de usuarios del sistema para ser utilizados en la configuración de parámetros del sistema con entidad parametrizable Usuario.\n    • ALM_MOTIVO: guarda los distintos posibles motivos de rechazo al realizar un almacenamiento.\nEstos dominios pueden ser de tipo interno o editables. Los dominios editables pueden ser modificados desde la pantalla “Dominio”. Para ingresar a la misma debe dirigirse al menú Registro > Dominios > Dominio.\nEn la siguiente captura se aprecia el panel “Dominio”, el cual lista todos los dominios que son utilizados en distintas configuraciones del sistema:\nLos dominios que tienen el campo FL Interno en S son de tipo interno, mientras los que tienen este campo con valor N son editables.\nPara modificar un dominio editable se debe presionar el botón 'tres lineas horizontales'. Esta acción despliega un modal en el que se muestra una grilla con los valores del dominio. A modo de ejemplo, en la siguiente captura se puede ver este modal con los valores del dominio ALM_MOTIVO.\nSe puede apreciar que la grilla tiene habilitados los botones para la modificación de su contenido, pudiendo agregar nuevos registros o editar los existentes."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Idioma"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Idioma:\nLa configuración de idioma se utiliza para sobreescribir o ingresar traducciones de los textos que se muestran en las grillas y formularios del panel web, así como para los mensajes retornados por las interfaces del sistema.\nPara cambiar o agregar una traducción, debe dirigirse al menú Configuración > Configuración de idioma.\nEn el campo Lenguaje a modificar se debe seleccionar el idioma configurado para los usuarios que verán la traducción y se debe presionar el botón 'Seleccionar idioma'.\nLuego en la grilla se debe de cambiar o agregar el campo Valor traducido correspondiente al recurso que se desea traducir."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Impresión:\nLas configuraciones de impresión se realizan para poder imprimir las distintas etiquetas utilizadas en la operativa de un depósito.\nA continuación se detallan las distintas configuraciones que se pueden realizar."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Lenguajes de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Lenguajes de Impresión:\nLas impresoras de etiquetas trabajan con distintos lenguajes de impresión. La configuración de estos lenguajes se realiza en la pantalla “Lenguaje de impresión”. Ésta se encuentra en el menú Configuración > Impresión > Lenguaje de impresión.\nUna vez dentro de esta página se muestra una grilla con los distintos lenguajes configurados.\nEn esta pantalla se puede modificar y eliminar lenguajes, así como agregar nuevos."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Servidores de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Servidores de Impresión:\nLa configuración de los servidores de impresión se lleva a cabo en la pantalla “Servidores de impresión”. Para acceder a la misma, debe dirigirse al menú Configuración > Impresión > Lenguaje de impresión.\nUna vez dentro de esta página se muestra una grilla con los servidores configurados.\nPara crear un servidor se debe presionar el botón . Esta acción despliega un modal como el siguiente:\nEn éste se deben completar los campos con la información correspondiente y presionar el botón 'Confirmar'.\nPara modificar o eliminar un servidor, se debe presionar el botón 'lápiz' o 'papelera' respectivamente en la línea de la grilla correspondiente al servidor."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Impresoras"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Impresoras:\nLa configuración de impresoras se lleva a cabo en la pantalla “Impresoras”. Para acceder a la misma debe  dirigirse al menú Configuración > Impresión > Impresoras.\nEn la siguiente captura se aprecia el panel “Impresoras”, el cual lista todas las impresoras definidas en el sistema.\nEn la grilla de esta pantalla se muestran todas las impresoras configuradas en el sistema.\nPara crear una impresora, se debe presionar el botón 'nueva impresora'. Esta acción despliega un modal.\nEn éste se deben completar los campos con la información correspondiente y presionar el botón 'Confirmar'.\nTambién es posible modificar la configuración de una impresora presionando el botón 'lápiz' en la línea correspondiente de la grilla."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Estilos de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Estilos de Impresión:\nLas etiquetas pueden ser impresas bajo diferentes estilos de impresión. Estos estilos son utilizados para presentar información diferente según las necesidades para las que fueron definidos.\nPor ejemplo, se puede utilizar un formato específico para etiquetas de ubicaciones de stock y otro para etiquetas de ubicaciones de puertas del depósito. Ambas representan ubicaciones pero según el tipo de ubicación se puede elegir visualizar distintos datos.\nEl formato específico en que se presenta la información de las etiquetas es definido por el template de impresión asociado al estilo."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Estilos de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Estilos de Impresión:\nPara definir un estilo de impresión, debe dirigirse al menú Configuración > Impresión > Estilos > Estilo de Etiquetas.\nEl panel “Estilo de Etiquetas” lista todos los estilos de etiquetas definidos en el sistema:\nSe puede apreciar que los campos Descripción y Tipo pueden ser modificados para los estilos existentes desde la propia grilla.\nTambién se puede ver que existe la opción de insertar nuevos registros permitiendo agregar nuevos estilos al sistema.\nAl ingresar un nuevo estilo, se deben completar los siguientes campos:\n    • Estilo: se ingresa un nombre que identifique al nuevo estilo.\n    • Descripción: se ingresa una descripción para el nuevo estilo.\n    • Tipo: se selecciona el tipo de etiqueta en que se aplicará el nuevo estilo."
+    },
+    {
+        "role": "user",
+        "content": "Asignación de Estilos a Tipos de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación de Estilos a Tipos de Contenedores:\nA los distintos tipos de contenedores de mercadería se les puede asignar estilos de impresión específicos. Para esto debe dirigirse al menú Configuración > Impresión > Estilos > Estilos para Contenedores:\nEn la grilla de esta página se podrán insertar nuevos registros para asignarle estilos de impresión a los distintos tipos de contenedores que existen en el sistema. Para ingresar un nuevo registro se debe de seleccionar el Estilo y el Tipo Contenedor."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Templates de Impresión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Templates de Impresión:\nLos templates de etiquetas son los que definen el formato que tendrán las mismas. Estos son definidos para un estilo y un lenguaje de impresión.\nPara definir un nuevo template, debe dirigirse al menú Configuración > Impresión > Template de Etiquetas.\nDentro de esta página se debe presionar el botón 'Nuevo template'. Esta acción despliega un modal:\nEn éste se debe seleccionar el Estilo y el Lenguaje de impresión a utilizar, además de completar los demás campos con la información correspondiente para el nuevo template.\nFinalmente, se debe presionar el botón 'Confirmar' para finalizar la creación del nuevo template."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de Tracking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de Tracking:\nLa aplicación WIS Tracking es utilizada para realizar el control de entregas con dispositivos móviles y por seguimiento web. En esta se puede llevar la gestión integral del recorrido de un vehículo, administrando en tiempo real la entrega de pedidos, bultos y documentación.\nLa configuración de esta aplicación en el WMS se realiza en el panel web. Para esto debe dirigirse al menú Configuración > Configuración de Tracking.\nEn la pantalla “Configuración de Tracking” se muestra un formulario:\nEn éste se deben completar los campos con los parámetros correspondientes para conectarse con Tracking. Una vez se llenan los campos, se debe presionar el botón 'guardar parámetros'. Al realizar esta acción, el campo Estado tracking queda con valor PENDIENTE. Para cambiar este estado a ACTIVO se debe realizar la sincronización inicial de los datos del WMS que intervienen en la aplicación Tracking. Esto se hace presionando el botón 'sincronización de datos'.\nPara desactivar la sincronización con la aplicación Tracking se debe presionar el botón 'Desactivar tracking'."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Avanzado de Datos Maestros"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Avanzado de Datos Maestros:\nEn esta sección se detalla la gestión avanzada de datos maestros en el sistema. Se presentan los pasos para la definición de datos pertenecientes a Productos, Ubicaciones y Preparaciones, que están por fuera de la operativa básica del sistema."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Avanzado de Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Avanzado de Productos:\nA continuación se presenta una guía para la definición y gestión de datos pertenecientes a los productos. Se detallan funcionalidades como la definición de familia, ramos y clases de productos; la definición y el manejo de códigos de barra de productos y la consulta e ingreso de capacidad de pallets por producto."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Familias de Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Familias de Productos:\nLa familia es un atributo que permite agrupar a los productos por alguna característica en común. Puede ser utilizado para organizar productos de una misma familia dentro de un sector.\nAlgunos ejemplos de familia pueden ser: Calzado, Indumentaria, Aceites, etc.\nPara definir una nueva familia de productos debe dirigirse al menú Registro > Productos > Familia de productos.\nEn esta página se debe presionar el botón 'Nueva familia'. Esto abrirá un modal:\nEn este formulario se deben completar ambos campos. En el Código se debe ingresar un valor numérico, el cual identificará a la nueva familia, y en Descripción se debe ingresar un texto que represente a la misma.\nFinalmente, se debe presionar el botón 'Crear' para confirmar el alta de la nueva familia de productos."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Ramos de Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Ramos de Productos:\nEl ramo, al igual que la familia es un atributo que permite agrupar a los productos basados en sus características. Es una agrupación más detallada y específica que forma parte de una familia de productos. Por ejemplo, una empresa podría tener una familia de productos que incluye electrónicos de consumo, dentro de la cual podría haber ramos de productos como teléfonos móviles, computadoras portátiles y accesorios electrónicos.\nPara definir un nuevo ramo de productos debe dirigirse al menú Registro > Productos > Ramo de Productos.\nDentro de esta página se debe insertar un nuevo registro en la grilla:\nLos campos requeridos para ingresar el nuevo registro son:\n    • Ramo: valor numérico que identifica al ramo.\n    • Descripción de ramo: texto que describe al ramo."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Clases de Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Clases de Productos:\nLas clases de productos son utilizadas para limitar la manipulación de los productos dentro del depósito de modo que sólo productos de la misma clase puedan ser manipulados juntos. Este es un atributo que también pertenece a las ubicaciones del sistema, en este caso se utiliza para limitar el almacenamiento de productos a ubicaciones que tengan su misma clase.\nPara definir una nueva clase debe dirigirse al menú Registro > Mantenimientos > Ubicaciones > Sectores (Clases).\nEn esta página se debe insertar un nuevo registro en la grilla:\nLos campos requeridos para ingresar una nueva clase son: Código que identificará a la misma y Descripción. Opcionalmente se puede seleccionar una Super clase, siendo esta una entidad más general para la manipulación de productos y ubicaciones. Algunos ejemplos de super clases son:  alimentos, fármacos y tóxicos.\nEn la grilla, también se tiene la opción de editar los campos de los registros que tienen los íconos 'V' o 'lápiz' a la derecha de dichos campos."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Códigos de Barras para Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Códigos de Barras para Productos\nLos códigos de barras de productos pueden ser gestionados a través del panel web o desde colectores. A continuación se detallan ambos métodos."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Administrativo de Códigos de Barras"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Administrativo de Códigos de Barras comprende: Mantenimiento Administrativo Manual de Códigos de Barras, Mantenimiento Administrativo de Códigos de Barras por carga de Excel y Mantenimiento Operativo de Códigos de Barras."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Administrativo Manual de Códigos de Barras"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Administrativo Manual de Códigos de Barras:\nEn el panel web, los códigos de barras se manejan en la pantalla “Código de barras”.\nPara acceder a la misma debe dirigirse al menú Registro > Producto > Código de Barras.\nEn esta página se pueden dar de alta nuevos códigos de barras para los productos, además de modificar o borrar códigos existentes.\nPara ingresar un nuevo código se debe de insertar un nuevo registro en la grilla.\nAquí se deben completar los siguientes campos:\n    • Empresa: empresa a la que pertenece el producto.\n    • Producto: producto al que se le asignará el nuevo código.\n    • Tipo: tipo del código. Por ejemplo EAN, UPC, etc.\n    • Cód. Barras: dígitos del nuevo código.\n    • Prioridad: prioridad con la que se imprimirán las etiquetas de productos con múltiples códigos de barra. Tienen mayor prioridad de impresión los códigos de menor valor en este campo.\nEn la grilla, también se tiene la opción de eliminar códigos de barras con el botón 'Papelera' o editar los campos de los registros que tienen los íconos 'V' o 'lápiz' a la derecha de los mismos.\nTambién existe la forma de asignar códigos de barras a un producto específico desde el panel “Productos”. Para ello, se debe abrir el menú contextual de la línea correspondiente al producto en la grilla y presionar el botón 'Códigos de barra'.\nAl realizar esta acción, se redirige a la pantalla “Código de barras” con un filtro sobre la empresa y el producto asociados. Estos datos se muestran en la parte superior de la grilla.\nPor ejemplo, en la siguiente imagen se muestra esta pantalla para el producto PR1 de la Empresa 2:\nAl ingresar un nuevo registro en esta pantalla, no se admite el ingreso de los campos Empresa ni Producto, ya que estos valores son tomados automáticamente del filtro de la página, permitiendo únicamente asignar códigos de barras al producto filtrado."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Administrativo de Códigos de Barras por carga de Excel"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Administrativo de Códigos de Barras por carga de Excel:\nPara crear uno o múltiples códigos de barras, modificar o borrar los datos de códigos existentes a través de la carga de un documento Excel, debe dirigirse al panel 'Consulta de ejecución de interfaz'.\nEsta pantalla se encuentra en el menú Interfaz > Consulta ejecución interfaz.\nEn esta página se debe presionar el botón con ícono de 'Excel', situado en la parte superior de la grilla, y seleccionar la opción 'Importar desde Excel'. Esta acción despliega un modal:\nEn éste se deben completar los campos que se detallan a continuación:\n    • APIs: se selecciona la entidad con la que se está trabajando. En este caso Código de barras.\n    • Empresa: se ingresa la empresa a la que pertenece la entidad con la que se está trabajando.\n    • Referencia: se ingresa un texto que indique la operación que se está realizando.\nUna vez completados los campos se debe presionar el botón 'Descargar planilla'. Esto descargará la planilla Excel donde se deberán completar los campos correspondientes a los códigos de barras.\nSi la operación corresponde con la eliminación de códigos existentes, en la planilla Excel sólamente se deben ingresar los campos: Codigo con los códigos en cuestión, Producto con el identificador del producto vinculado al código de barras y TipoOperacion con el valor B (Baja).\nSi la operación corresponde con la edición de códigos existentes, en la planilla Excel se deben ingresar los campos de los códigos a modificar, cambiando únicamente los valores de las columnas que se desean editar. El campo TipoOperacion debe tener el valor S (Sobrescritura).\nPor último, si la operación corresponde con la inserción de códigos nuevos, el campo TipoOperacion debe tener el valor A (Alta).\nPara finalizar la operación, se debe arrastrar el documento Excel con la información de los códigos de barras hacia el recuadro del modal."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Operativo de Códigos de Barras"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Operativo de Códigos de Barras:\nPara definir nuevos códigos de barra desde colectores debe dirigirse a Registro > Registro de Productos.\nUna vez dentro de la pantalla se muestra un formulario:\nEn esta pantalla se deben ingresar los siguientes campos:\n    • Empresa: empresa a la que pertenece el producto.\n    • Tipo de código: tipo del código. Por ejemplo EAN, UPC, etc.\n    • Código de Barras: dígitos del nuevo código.\n    • Producto: producto al que se le asignará el nuevo código.\nEn caso que el Código de Barras que se ingrese ya exista en el sistema, se redirige a una nueva pantalla en la que se pueden editar las dimensiones y peso del producto.\nEsto también sucede si se ingresa un nuevo Código de Barras para un Producto existente. En este caso la redirección se lleva a cabo al confirmar el alta del código."
+    },
+    {
+        "role": "user",
+        "content": "Capacidad de Pallets por Producto"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCapacidad de Pallets por Producto:\nLa capacidad de pallets por producto se refiere a la cantidad de unidades de un producto que pueden ser almacenadas en un tipo específico de pallet. Esta gestión se realiza a través de la pantalla 'Capacidad de Pallet'.\nPara acceder a la misma debe dirigirse al menú Registro > Productos > Capacidad Pallet por Producto.\nEn la siguiente captura se aprecia el panel 'Capacidad de pallet', el cual lista información sobre la capacidad de distintos tipos de pallets para productos específicos:\nPara ingresar una nueva capacidad se debe insertar un nuevo registro en la grilla.\nAquí se deben completar los siguientes campos:\n    • Cod. Emp: empresa a la que pertenece el producto.\n    • Pallet: tipo del pallet.\n    • Prod: producto del que se asignará la capacidad.\n    • Cantidad: capacidad del pallet para el producto.\nTambién existe la forma de asignar capacidades de pallets a un producto específico desde el panel “Productos”. Para ello, desde la grilla de productos, se debe abrir el menú contextual de la línea correspondiente al producto y presionar el botón 'Capacidad pallet'.\nAl realizar esta acción, se redirige a la pantalla “Capacidad de pallet” con un filtro sobre la empresa y el producto asociados. Estos datos se muestran en la parte superior de la grilla.\nA modo de ejemplo, en la siguiente imagen se muestra esta pantalla para el producto PR1 de la Empresa 2:\nAl ingresar un nuevo registro en esta pantalla no se admite el ingreso de los campos Cod. Emp ni Prod, ya que estos valores son tomados automáticamente del filtro de la página, permitiendo únicamente asignar capacidades de pallets al producto filtrado."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Avanzado de Ubicaciones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Avanzado de Ubicaciones:\nEn esta sección se presenta una guía para la gestión avanzada de ubicaciones en el sistema. Se abordan aspectos clave como la definición y manejo eficiente de ubicaciones de picking, así como la configuración simultánea de ciertos atributos sobre múltiples ubicaciones."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Ubicaciones de Picking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Ubicaciones de Picking:\nUna ubicación de picking es una ubicación especial destinada a un producto específico con el objetivo de agilizar el pickeo. De esta forma, productos que no estén asociados a una ubicación de picking no pueden ser almacenados en la misma.\nLas ubicaciones de picking son priorizadas por la liberación de onda sobre las ubicaciones de stock al momento de organizar el picking, a la vez que cuentan con comportamientos particulares en lo referente al manejo de reservas. Como ejemplo, la liberación de onda puede reservar mercadería por encima del stock disponible en una ubicación de picking dando lugar a un reabastecimiento pendiente. Esto no es posible en ubicaciones de stock.\nPor su parte, las ubicaciones de picking definen criterios para limitar la cantidad de mercadería a pickear / reabastecer (padrón), así como cantidades máximas y mínimas de mercadería para ponderar el reabastecimiento entre ellas.\nPara definir ubicaciones de picking debe dirigirse al menú Registro > Mantenimientos > Ubicaciones > Mantenimiento de Ubicaciones.\nEn esta página se debe presionar el botón . Esto despliega un modal:\nEn éste se debe de seleccionar el valor PICKING en el campo Área.\nUna vez completados los demás campos del modal se debe presionar el botón 'Crear'.\nLas ubicaciones de picking pueden ser gestionadas a través del panel web o desde colectores. A continuación se detallan ambos métodos de gestión."
+    },
+    {
+        "role": "user",
+        "content": "Asignación de Ubicaciones de Picking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación de Ubicaciones de Picking comprende: Asignación Administrativa de Ubicaciones de Picking y Asignación Operativa de Ubicaciones de Picking."
+    },
+    {
+        "role": "user",
+        "content": "Asignación Administrativa de Ubicaciones de Picking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación Administrativa de Ubicaciones de Picking:\nEn el panel web las ubicaciones de picking se manejan en la pantalla “Asignación de ubicaciones de picking”. Para acceder a la misma, debe dirigirse al menú Registro > Mantenimientos > Ubicaciones > Asignación de ubicaciones de picking.\nEn esta página se pueden asignar ubicaciones de picking a productos, además de modificar o borrar registros existentes.\nPara ingresar una nueva asignación se debe de insertar un nuevo registro en la grilla.\nAllí se deben completar los siguientes campos:\n    • Empresa: empresa a la que pertenece el producto.\n    • Producto: producto que se asignará a la ubicación de picking.\n    • Ubicación: ubicación de picking.\n    • Padrón: valor entero que representa la unidad de medida del producto en que se realiza la reserva al liberar la onda (Definición de Ondas de Preparación). Por ejemplo, si el producto es una funda de 6 botellas, el padrón sería 6, siendo necesario que la cantidad a pickear en esta ubicación sea múltiplo de 6. Un producto puede tener más de una ubicación de picking siempre que estas no tengan el mismo número de padrón.\n    • Stock mínimo: cantidad mínima que puede albergar la ubicación de picking.\n    • Stock máximo: cantidad máxima que puede albergar la ubicación de picking.\n    • Desborde: valor máximo que una preparación puede solicitarle a una ubicación de picking. Si el valor de la preparación es superior a la cantidad del desborde, la preparación en cuestión se envía a pickear a ubicaciones de stock.\nEn la grilla también se tiene la opción de eliminar estas asignaciones con el botón 'papelera' o editar los campos de los registros que tienen el ícono 'lápiz'.\nAdemás existe la opción de asignar ubicaciones de picking a un producto específico desde el panel “Productos”. Para ello, se debe abrir el menú contextual de la línea correspondiente al producto en la grilla y presionar el botón 'Asignación de ubicaciones de picking'.\nAl realizar esta acción, se redirige a la pantalla “Asignación de ubicaciones de picking” con un filtro sobre la empresa y el producto asociados. Estos datos se muestran en la parte superior de la grilla.\nPor ejemplo, en la siguiente imagen se muestra esta pantalla para el producto PR1 de la Empresa 2:\nAl ingresar un nuevo registro en esta pantalla no se admite el ingreso de los campos Empresa ni Producto, ya que estos valores son tomados automáticamente del filtro de la página, permitiendo únicamente asignar ubicaciones al producto filtrado."
+    },
+    {
+        "role": "user",
+        "content": "Asignación Operativa de Ubicaciones de Picking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación Operativa de Ubicaciones de Picking:\nPara asignar un producto a una ubicación de picking desde colectores debe dirigirse a Registro > Registro de Picking.\nUna vez dentro de esta pantalla se muestra un formulario:\nEn esta pantalla se deben ingresar los siguientes campos:\n    • Ubicación: ubicación de picking.\n    • Producto: producto que se asignará a la ubicación de picking.\n    • Empresa: empresa a la que pertenece el producto.\n    • Opción: este campo sólo se habilita cuando existe la asignación producto / ubicación de picking para la empresa seleccionada; en caso contrario toma automáticamente el valor CREAR. Las opciones disponibles son: CREAR, MODIFICAR y ELIMINAR.\n    • Padrón: valor entero que representa la unidad de medida del producto en que se realiza la reserva al liberar la onda (Definición de Ondas de Preparación). Por ejemplo, si el producto es una funda de 6 botellas, el padrón sería 6, siendo necesario que la cantidad a pickear en esta ubicación sea múltiplo de 6. Un producto puede tener más de una ubicación de picking siempre que estas no tengan el mismo número de padrón.\n    • Stock mínimo: cantidad mínima que puede albergar la ubicación de picking.\n    • Stock máximo: cantidad máxima que puede albergar la ubicación de picking.\n    • Desborde: valor máximo que una preparación puede solicitarle a una ubicación de picking. Si el valor de la preparación es superior a la cantidad del desborde, la preparación en cuestión se envía a pickear a ubicaciones de stock."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Atributos Masivos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Atributos Masivos:\nWIS permite la definición de ciertos atributos de forma masiva sobre ubicaciones del sistema. Los atributos que se pueden modificar simultáneamente en múltiples ubicaciones son: Tipo de Ubicación, Rotatividad y Zona.\nLa definición masiva de estos atributos se realiza en la pantalla 'Mantenimiento de Ubicaciones'. Para acceder a esta pantalla, debe dirigirse al menú: Registro > Mantenimientos > Ubicaciones > Mantenimiento de Ubicaciones.\nUna vez dentro de este panel, se debe presionar el botón , el cual desplegará un modal:\nEn éste se deben seleccionar los atributos que se desean asignar a un conjunto de ubicaciones.\nUna vez seleccionados, deben marcarse las casillas de las ubicaciones a las que se les asignarán dichos atributos.\nFinalmente, se debe abrir el menú contextual de la grilla (tres lineas horizontales) y presionar el botón 'Asignar atributos'."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Avanzado de Preparaciones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Avanzado de Preparaciones:\nEn esta sección se presenta una guía de las operativas avanzadas sobre preparaciones de pedidos. Se abordan temas como la definición de ondas de preparación y rutas de entrega, además del mantenimiento de equipos y mantenimiento de vehículos."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Ondas de Preparación"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Ondas de Preparación:\nUna onda de preparación permite organizar la preparación para un conjunto de pedidos. Los pedidos se agrupan por rutas de entrega, y a su vez estas rutas se agrupan en ondas. Al liberarse una onda, la preparación asociada queda limitada a un subconjunto de los pedidos asociados a las rutas de entrega vinculadas a dicha onda.\nLa gestión de ondas de preparación en el panel web se lleva a cabo en la pantalla “Ondas de preparación”. Para ingresar a la misma debe dirigirse al menú Registro > Mantenimientos > Preparación/Expedición > Ondas de Preparación.\nEl panel “Ondas de preparación” lista todas las ondas de preparación definidas en el sistema:\nPara ingresar una nueva onda de preparación, se debe de insertar un nuevo registro en la grilla.\nAllí se deben de completar los siguientes campos:\n    • Código: identificador de la nueva onda.\n    • Descripción: descripción de la nueva onda.\n    • Predio: código del predio al que se asigna la nueva onda.\nEl campo Estado queda automáticamente en activo (botón alternador) cuando se da de alta la onda. Este determina si la onda puede ser utilizada o no.\nEn la grilla también se tiene la opción de editar los campos de los registros que tienen los íconos 'V' o 'lápiz'."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Rutas de Entrega"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Rutas de Entrega:\nLos pedidos se agrupan por rutas de entrega, y a su vez estas rutas se agrupan en ondas. Al liberarse una onda, la preparación asociada queda limitada a un subconjunto de los pedidos asociados a las rutas de entrega vinculadas a dicha onda.\nAdemás, los egresos (camiones) también tienen rutas de entrega asociadas. En este caso, la asociación de una ruta de entrega a un camión limita los pedidos, contenedores y cargas que pueden ser considerados al momento de armar dicho camión.\nLa gestión de rutas de entrega en el panel web se lleva a cabo en la pantalla “Rutas de Entrega”. Para ingresar a la misma debe dirigirse al menú Registro > Mantenimientos > Preparación/Expedición > Rutas de Entrega.\nEn la siguiente captura se aprecia el panel “Rutas de entrega”, el cual lista todas las rutas de entrega definidas en el sistema:\nPara ingresar una nueva ruta de entrega, se debe de insertar un nuevo registro en la grilla:\nAllí se deben de completar los siguientes campos:\n    • Código: identificador de la nueva ruta.\n    • Descripción: descripción de la nueva ruta.\n    • Puerta: código de la puerta a la que se asigna la nueva ruta.\n    • Onda: código de la onda a la que se asigna la nueva ruta.\n    • Cód. Transp.: código del transportista al que se asigna la nueva ruta.\nEl campo Estado queda automáticamente en activo () cuando se da de alta la ruta. Este determina si la ruta puede ser utilizada o no.\nEn la grilla también se tiene la opción de editar los campos de los registros que tienen los íconos 'V' o 'Lápiz'."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento de Equipos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento de Equipos:\nEn WIS los equipos son la maquinaria o dispositivos utilizados para movilizar mercadería dentro del depósito (por ejemplo: carritos, montacargas, etc.). Estos equipos se utilizan en diferentes operativas.\nUn caso particular son los equipos manuales. Estos buscan representar la movilización de mercadería a través de un operario sin el empleo de maquinaria auxiliar (es el propio operario quien transporta la mercadería).\nLos equipos (tanto manuales como maquinarias) poseen una ubicación asociada que los identifica.\nLa gestión de equipos en el panel web se lleva a cabo en la pantalla “Equipos”. Para ingresar a la misma debe dirigirse al menú Registro > Mantenimientos > Preparación/Expedición > Equipos.\nEn la siguiente captura se aprecia el panel “Equipos”, el cual lista todos los equipos definidos en el sistema:\nEn la grilla de esta página se muestran los distintos equipos registrados en el sistema, junto con las opciones disponibles para su gestión."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Equipos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Equipos:\nPara ingresar un nuevo equipo se debe presionar el botón 'Crear equipo'. Esto despliega un modal:\nEn este modal se deben de completar los siguientes campos: \n    • Descripción: texto que representa al nuevo equipo.\n    • Tipo: tipo del equipo a crearse.\n    • Predio: código del predio al que se asigna el nuevo equipo.\nUna vez completados los campos se debe presionar el botón 'Crear'."
+    },
+    {
+        "role": "user",
+        "content": "Eliminar y editar equipos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nEliminar y editar equipos:\nEn la grilla de la pantalla “Equipos” también se tiene la opción de eliminar equipos con el botón  o editar los campos de los registros que tienen los íconos 'V' o 'lápiz'."
+    },
+    {
+        "role": "user",
+        "content": "Impresión de Etiquetas de Equipos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nImpresión de Etiquetas de Equipos:\nA nivel de equipo se manejan dos tipos de etiquetas: etiquetas de equipo (que identifican al equipo globalmente) y etiquetas de posición de equipos (que identifican a posiciones dentro del equipo).\nPara imprimir etiquetas de equipos se deben marcar las casillas de las líneas de la grilla correspondientes a los equipos que se desea imprimir sus etiquetas. Luego de seleccionar los equipos, se debe abrir el menú contextual de la grilla (tres lineas horizontales) y presionar el botón 'imprimir'. Esto despliega un modal en el que se debe de seleccionar la configuración de impresión deseada y confirmar la acción.\nPara imprimir etiquetas de posición de equipos se debe presionar el botón que aparece a la izquierda de la línea correspondiente al equipo en la grilla. Al hacerlo se despliega un modal:\nEn éste se debe de elegir la configuración de impresión deseada y completar los campos Mínimo y Máximo. En estos campos se debe ingresar la posición mínima y máxima del equipo respectivamente.\nUna vez completados los campos, se confirma la impresión presionando el botón 'imprimir'."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento de Vehículos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento de Vehículos:\nLos vehículos son utilizados en la definición de egresos. En el sistema se pueden definir Tipos de Vehículos y Vehículos basados en esos tipos. A continuación se detallan los pasos para definir ambas entidades."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Tipos de Vehículos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Tipos de Vehículos:\nLa gestión de tipos de vehículos en el panel web se lleva a cabo en la pantalla “Tipos de Vehículos”. Para ingresar a la misma debe dirigirse al menú Registro > Mantenimientos > Preparación/Expedición > Tipos de vehículos.\nPara ingresar un nuevo tipo de vehículo se debe presionar el botón 'Agregar equipo'. Esto despliega un modal:\nEn este modal se deben de completar los siguientes campos:\n    • Descripción: describe el nuevo tipo de vehículo.\n    • Volumen: indica el volumen del tipo de vehículo y la barra corresponde al porcentaje de ocupación de ese volumen.\n    • Peso: indica el peso del tipo de vehículo y la barra corresponde al porcentaje de ocupación de ese peso.\n    • Bultos: indica los bultos del tipo de vehículo y la barra corresponde al porcentaje de ocupación de esos bultos.\n    • Casillas: al final del modal aparecen unas casillas que corresponden a características del nuevo tipo de vehículo. Estas casillas se deben marcar si el tipo de vehículo cumple con la característica correspondiente. Estas características son:\n        - Refrigerado\n        - Admite carga lateral\n        - Admite zorra\n        - Solo cabina\nUna vez completados los campos, se confirma el alta del nuevo tipo de vehículo presionando el botón 'Crear'."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Vehículos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Vehículos:\nLa gestión de vehículos en el panel web se lleva a cabo en la pantalla “Vehículos”. Para ingresar a la misma debe dirigirse al menú Registro > Mantenimientos > Preparación/Expedición > Vehículos.\nPara ingresar un nuevo vehículo se debe presionar el botón 'Agregar vehiculo'. Esto despliega un modal:\nEn este modal se deben completar los siguientes campos:\n    • Tipo: selección del tipo de vehículo.\n    • Predio: selección del predio al que será asignado.\n    • Descripción: descripción del vehículo.\n    • Matrícula: matrícula del vehículo.\n    • Transportista: selección del transportista al que será asignado.\n    • Marca: marca del vehículo.\n    • Disponibilidad: en los campos Disponible desde y Hasta se ingresan el horario inicial y final, respectivamente, en el que estará disponible la utilización del vehículo.\nUna vez completados los campos, se confirma el alta del nuevo vehículo presionando el botón 'Crear'."
+    },
+    {
+        "role": "user",
+        "content": "Administración de Bloqueos y Sesiones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAdministración de Bloqueos y Sesiones:\nWIS Traffic Officer es una herramienta que permite a usuarios de tipo Administrador gestionar bloqueos operativos y sesiones de usuarios.\nEn referencia a los bloqueos operativos, WIS permite bloquear temporalmente objetos del negocio dentro de un flujo operativo para prevenir modificaciones concurrentes sobre estos objetos que puedan afectar su integridad. Por ejemplo, durante la preparación de un detalle de picking, este queda bloqueado por el operario que lo atiende, evitando que otro operario prepare el mismo detalle simultáneamente.\nEstos bloqueos pueden liberarse automáticamente al finalizar la operación, después de un tiempo configurable de inactividad o manualmente por los administradores del sistema.\nReferido a las sesiones de usuario, cada vez que un usuario ingresa al Panel Web o a los Colectores de WIS, se genera una nueva sesión que se mantiene activa hasta que el usuario se desloguea del sistema, vence un tiempo configurable de inactividad o un administrador del sistema la remueve administrativamente. En cualquiera de estos tres escenarios, la sesión es finalizada.\nInternamente, WIS contabiliza las sesiones iniciadas por los usuarios del sistema. Este conteo se incrementa con cada nuevo inicio de sesión y se reduce cada vez que una sesión es finalizada. Dependiendo del licenciamiento contratado, puede ocurrir que, superada la cantidad máxima de sesiones activas, el sistema no permita iniciar sesiones adicionales. Esto puede solventarse finalizando sesiones activas mediante alguna de las vías antes mencionadas.\nEl conteo de sesiones es global, es decir, se toman en cuenta tanto las sesiones activas en el Panel Web como en los Colectores.\nUn mismo usuario solo puede tener una sesión activa a la vez en el Panel Web o en los Colectores. Si un usuario inicia sesión en uno de estos sistemas teniendo una sesión activa en el otro, esta última se finaliza automáticamente.\nA efectos del vencimiento de las sesiones y bloqueos inactivos, vale señalar que las aplicaciones del Panel Web y Colectores funcionan de la siguiente manera:\n    • Colectores: reporta periódicamente actividad de forma automática a Traffic Officer, actualizando la fecha y hora de la última actividad sobre las sesiones y bloqueos. Estos se consideran para el cálculo del tiempo de inactividad.\n    • Panel Web: reporta actividad a Traffic Officer con cada acción que realiza el usuario sobre el sistema (búsquedas, navegaciones, etc.), actualizando la fecha y hora de la última actividad sobre las sesiones y bloqueos. Estos se consideran para el cálculo del tiempo de inactividad."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer es una herramienta que permite a usuarios de tipo Administrador gestionar bloqueos operativos y sesiones de usuarios, en ella se puede:\nIniciar Sesión.\nCierre de Sesión.\nAdministración de Bloqueos.\nConsulta de Bloqueos Activos.\nLiberación Administrativa de Bloqueos.\nAdministración de Sesiones.\nConsulta de Sesiones Activas.\nFinalización Administrativa de Sesiones.\nConsulta de Eventos de Desborde."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Inicio de Sesión "
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Inicio de Sesión en WIS Traffic Officer:\nAl ingresar a la aplicación Traffic Officer, se muestra el formulario de inicio de sesión.\nAl ingresar con las credenciales de un usuario del sistema, se muestra la pantalla de inicio.\nEn esta pantalla se puede ver un cabezal con la siguiente información:\n    • A la derecha del cabezal aparece el nombre del usuario (en este caso “Admin”) junto al botón para cerrar la sesión (simbolo de persona con una 'x').\n    • En la parte central del cabezal se encuentra el nombre de la aplicación.\n    • A la izquierda del cabezal se encuentra el botón de 'tres lineas horizontales', que al presionarlo despliega los enlaces a las pantallas disponibles para el usuario logueado.\nSi el usuario no es de tipo Administrador, únicamente se muestra el enlace a “Home”. En caso contrario, se muestran los siguientes vínculos:\nHome\nManejo de bloqueos\nManejo de sesiones\nConsulta de eventos"
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Cierre de Sesión"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Cierre de Sesión:\nPara cerrar la sesión en la aplicación Traffic Officer, el usuario deberá hacer click en el botón que se encuentra en la esquina derecha del cabezal: simbolo de persona con una 'x'."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Administración de Bloqueos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Administración de Bloqueos:\nEn las aplicaciones de WIS se manejan dos tipos de bloqueos operativos: Temporales y Globales.\nos bloqueos Temporales están circunscritos a la operativa en curso y se liberan automáticamente cuando:\n    • El usuario abandona la instancia del formulario en el que se generó el bloqueo (a menos que se declare traspaso de bloqueos entre formularios).\n    • El usuario cierra sesión.\n    • El bloqueo se libera automáticamente una vez vencido un tiempo configurable de inactividad.\nIndependientemente de su liberación automática, algunos formularios podrían liberar los bloqueos temporales de forma anticipada una vez culminada la operativa en curso.\nLos bloqueos Globales no se liberan automáticamente al abandonar la instancia del formulario donde se generaron, ni por cierre de sesión o vencimiento de bloqueos. En cambio, se liberan automáticamente por finalización de la operativa vinculada. Estos bloqueos están pensados para operaciones costosas en cómputo que requieren mantener los bloqueos activos hasta el término del procesamiento en curso.\nEn cualquiera de los dos casos, los usuarios de tipo Administrador pueden liberar los bloqueos manualmente."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Consulta de Bloqueos Activos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Consulta de Bloqueos Activos:\nPara consultar los bloqueos operativos que están activos, hay que dirigirse a la página“Manejo de bloqueos” desde el menú 'tres lineas horizontales' del cabezal.\nAl final de esta pantalla se muestra una grilla en la que aparecen todos los bloqueos activos en las aplicaciones Panel Web y Colectores.\nEn la grilla se muestran varios datos de los bloqueos, los cuales se describen a continuación:\n    • UserId: número del usuario que genera el bloqueo.\n    • Token_thread: token vinculado al bloqueo.\n    • Página Actual: pantalla en la que se encuentra actualmente la operativa que genera el bloqueo.\n    • Entidad: entidad del objeto bloqueado.\n    • Transacción: número de transacción vinculada al bloqueo.\n    • Id Bloqueo: número identificador del bloqueo.\n    • Global: indica el tipo de bloqueo. Si el valor es “N”, el bloqueo es Temporal; si el valor es “S”, el bloqueo es Global.\n    • Estado: estado del bloqueo.\n    • Página Origen: pantalla donde se originó el bloqueo.\n    • Página Destino: pantalla destino del bloqueo, donde se libera automáticamente al finalizar la operativa vinculada.\n    • Última Actividad Cabezal: indica la fecha y hora de la última actividad que reinició el contador de tiempo de inactividad configurado para la liberación de bloqueos.\n    • Ingreso Bloqueo: indica la fecha y hora en que se genera el bloqueo."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Liberación Administrativa de Bloqueos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Liberación Administrativa de Bloqueos:\nEn la grilla de los bloqueos, también se presenta la columna Acciones, donde para cada registro de bloqueo se encuentra el botón 'Eliminar'. Al presionar este botón se libera el bloqueo correspondiente.\nDesde esta pantalla también se pueden eliminar bloqueos masivamente. Esto se hace a través del formulario “Remover Bloqueo” presentado a continuación:\nEn este formulario se pueden eliminar bloqueos de las siguientes formas:\n    • Todos los bloqueos asociados a un token: se ingresa el número de token en el campo Token.\n    • Todos los bloqueos de un usuario específico: se ingresa el número del usuario en el campo UserId.\n    • Todos los bloqueos generados sobre una entidad con un token específico: se ingresan los valores del token y la entidad en los campos Token y Entidad respectivamente.\n    • Un único bloqueo por su identificador: se ingresan los valores de todos los campos del formulario correspondientes al bloqueo.\nPara cualquiera de estos casos, una vez completados los campos, se debe presionar el botón 'Remover bloqueo'.\nAl remover bloqueos por cualquiera de los métodos mencionados anteriormente, se muestra un mensaje de confirmación en la sección Respuestas API, ubicada en la parte superior de la grilla “Bloqueos Totales”:"
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Administración de Sesiones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Administración de Sesiones:\nLa administración de sesiones de usuarios en Traffic Officer se lleva a cabo en la pantalla “Manejo de Sesiones”, encontrada en el menú (tres lineas horizontales) del cabezal:\nAl inicio de esta página se encuentra la sección “Información General”, que contiene un resumen de los datos vinculados a las sesiones de usuarios. Estos datos se describen a continuación:\n    • Sesiones activas: cantidad de sesiones activas en las aplicaciones Panel Web y/o Colectores.\n    • Licencias contratadas: cantidad de sesiones contratadas.\n    • Tolerancia: cantidad de sesiones activas extras que pueden existir por encima de la cantidad contratada.\n    • Inactividad máx. (min): tiempo máximo en minutos de inactividad por sesión antes de que la misma se cierre automáticamente.\nCuando se supera la cantidad de sesiones contratadas, o cuando se supera la cantidad de tolerancia, se dispara un evento de desborde (más detalles en la sección Consulta de Eventos de Desborde)."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Consulta de Sesiones Activas"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Consulta de Sesiones Activas:\nLas sesiones activas de los usuarios se pueden consultar en la grilla que aparece al final de la pantalla “Manejo de Sesiones”.\nEn la grilla se muestra información de las sesiones activas de los usuarios. A continuación se detallan los campos de esta grilla:\n    • Id Usuario: número del usuario de la sesión.\n    • Login Usuario: nombre de usuario del usuario vinculado a la sesión.\n    • Nombre Usuario: nombre real del usuario de la sesión.\n    • Token: token vinculado a la sesión.\n    • Id Aplicación: número identificador de la aplicación vinculada a la sesión.\n    • Nombre Aplicación: nombre de la aplicación vinculada a la sesión.\n    • Inicio: fecha y hora en que se inició la sesión.\n    • Últ. Actividad: fecha y hora de la última actividad que reinició el contador de tiempo de inactividad configurado para el cierre automático de sesiones."
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Finalización Administrativa de Sesiones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Finalización Administrativa de Sesiones:\nPara finalizar una sesión de usuario activa desde la pantalla “Manejo de Sesiones”, en la grilla “Sesiones Activas” se debe presionar el botón  correspondiente a la línea de la sesión que se desea finalizar. Una vez finalizada la sesión se muestra un mensaje de confirmación en la sección Respuestas API: 'Sesion removida: Token: NULL'"
+    },
+    {
+        "role": "user",
+        "content": "WIS Traffic Officer Consulta de Eventos de Desborde"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nWIS Traffic Officer: Consulta de Eventos de Desborde:\nReferido al manejo de sesiones, un evento de desborde ocurre cuando se supera la cantidad máxima de sesiones contratadas.\nCuando esto sucede, el sistema no solo puede llegar a bloquear el inicio de sesiones adicionales, sino que además deja registro de la sesión que se intentó iniciar así como de las sesiones activas en ese momento.\nDependiendo del licenciamiento configurado, un evento de desborde puede ser de tipo Alerta (no impide el inicio de sesiones adicionales, pero provoca la aparición de un cartel informativo tanto en el Panel Web como en los Colectores indicando que se ha superado el máximo de licencias contratadas) o de tipo Bloqueo (bloqueando el inicio de sesiones adicionales).\nEn este sentido, la configuración de licenciamiento incluye un parámetro de tolerancia que indica cuántas sesiones adicionales se admiten sobre el máximo contratado. Mientras la cantidad total de sesiones activas no supere el máximo contratado más la tolerancia configurada, el sistema generará eventos de tipo Alerta y procederá según lo detallado anteriormente. En caso de que no exista una tolerancia configurada o que se supere el máximo contratado más la tolerancia configurada, el sistema generará eventos de tipo Bloqueo y procederá según lo detallado anteriormente.\nLos eventos de desborde se pueden consultar desde la pantalla “Consulta de Eventos” ubicada en el menú (tres lineas horizontales) del cabezal.\nEn la sección “Información General” se pueden ver los siguientes datos:\n    • Licencias contratadas: cantidad de sesiones contratadas.\n    • Tolerancia: cantidad de sesiones activas extras que pueden existir por encima de la cantidad contratada.\n    • Inactividad máx. (min): tiempo máximo en minutos de inactividad por sesión antes de que la misma se cierre automáticamente.\nLa información sobre los eventos se puede consultar en la grilla “Eventos de Sesiones”. Los datos presentados en esta grilla se describen a continuación:\n    • Id: número identificador del evento.\n    • Tipo: tipo de evento. “A” = Alerta, “B” = Bloqueo.\n    • Fecha Registro: fecha y hora en que se registró el evento.\n    • Cant. Sesiones Act.: cantidad de sesiones activas al momento de dispararse el evento.\n    • Id Usuario: número del usuario de la sesión que disparó el evento.\n    • Login Usuario: nombre de usuario del usuario vinculado a la sesión que disparó el evento.\n    • Nombre Usuario: nombre real del usuario de la sesión que disparó el evento.\n    • Id Aplicación: número identificador de la aplicación vinculada a la sesión que disparó el evento.\n    • Nombre Aplicación: nombre de la aplicación vinculada a la sesión que disparó el evento.\n    • Token: token vinculado a la sesión que disparó el evento.\nPara ver los detalles de un evento, desde la grilla se debe presionar el botón 'Detalle' en la columna Acciones correspondiente a la línea del evento a consultar. Al realizar esta acción se redirige a una página con los detalles del evento.\nEn la pantalla “Detalles de Evento”:\nLa sección “Evento” de esta pantalla se puede ver la misma información mostrada en la grilla de la pantalla anterior para el evento seleccionado.\nEn la grilla “Sesiones Asociadas” se muestra información sobre las sesiones vinculadas al evento en cuestión. Los datos mostrados sobre las sesiones son los mismos que se detallan en la sección Consulta de Sesiones Activas."
+    },
+    {
+        "role": "user",
+        "content": "Flujos Operativos Avanzados"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFlujos Operativos Avanzados:\nEsta sección se centra en técnicas avanzadas de recepción de productos y estrategias de almacenamiento, entre las que se incluye el Cross-Docking de una y dos fases. Se analiza en detalle la implementación eficiente de estas prácticas con el objetivo de optimizar los procesos logísticos y mejorar la eficiencia operativa."
+    },
+    {
+        "role": "user",
+        "content": "Gestión Documental"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGestión Documental:\nEl sistema WIS permite regularizar el stock del depósito ante las autoridades aduaneras a través de documentos formales. Cada operación que pueda afectar el stock, como entradas, salidas o ajustes, debe contar con un documento aprobado por las entidades aduaneras. Además, cualquier discrepancia entre las cantidades declaradas originalmente y las realmente registradas debe ser documentada y regularizada ante estas autoridades.\nDurante el proceso de regularización aduanera de cierto stock, este no está disponible para su uso habitual, como el cumplimiento de pedidos, aunque físicamente esté presente en el depósito. En este contexto, la disponibilidad del stock está determinada por la intersección entre el stock físicamente presente y el stock regularizado documentalmente.\nLos documentos de regularización pasan por diferentes estados, algunos de los cuales permiten el tratamiento habitual del stock documentado. Existen varios tipos de documentos según la operación regularizada, como ingreso o egreso de mercadería, actas de ajuste de stock, entre otros. Para obtener información detallada sobre la gestión documental en WIS, consulte el manual 'Módulo Documental'."
+    },
+    {
+        "role": "user",
+        "content": "Recepción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nRecepción:\nLa recepción de mercadería es una etapa crítica en la que se valida y registra la mercadería entrante, garantizando su correcta integración al inventario. En esta sección, se exploran temas avanzados sobre esta etapa.\nSe abordan temas como las sugerencias de almacenamiento, que optimizan el uso del espacio disponible; el cross docking de una y dos fases, que agiliza la distribución de productos sin necesidad de almacenarlos; y una descripción detallada de la operativa de la 'Mesa de Clasificación', diseñada para un manejo eficiente y preciso de los artículos recibidos."
+    },
+    {
+        "role": "user",
+        "content": "Sugerencias de Almacenamiento"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nSugerencias de Almacenamiento:\nEl sistema permite la configuración de reglas personalizadas sobre productos y ubicaciones con el fin de guiar al operario en el proceso de almacenamiento de mercadería dentro del depósito. Estas reglas están diseñadas para establecer criterios específicos que determinan la ubicación óptima de la mercadería en base a diversos parámetros, como el peso del producto o los requisitos de temperatura.\nPor ejemplo, algunas de estas reglas incluyen la asignación de productos de mayor peso a estanterías más bajas para garantizar la seguridad y la eficiencia en el manejo, así como la ubicación de productos sensibles a la temperatura en áreas designadas con control climático.\nToda esta información detallada sobre la configuración y el manejo de las reglas de almacenamiento, se encuentra documentada en profundidad en el manual 'Reglas de Almacenaje'."
+    },
+    {
+        "role": "user",
+        "content": "Cross-Docking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking:\nEl concepto de Cross-Docking es una práctica logística avanzada que ha ganado prominencia en la gestión de cadenas de suministro eficientes. En esencia, implica la recepción de productos en un centro de distribución y su posterior envío directo a los destinos finales, sin la necesidad de almacenamiento.\nEsta sección del manual está destinada a proporcionar una visión general del proceso de Cross-Docking, incluyendo operaciones involucradas y consideraciones para su aplicación en diversas operaciones logísticas.\nEl proceso comprende:\nCross-Docking de una Fase: Creación de Cross-Docking de una Fase, Liberación de Cross-Docking de una Fase, Recepción en Etiquetas de Contenedores, Conversión de Etiquetas.\nCross-Docking de dos Fases: Creación de Cross-Docking de dos Fases, Liberación de Cross-Docking de dos Fases, Colector de Cross-Docking, Finalización de Cross-Docking de dos Fases."
+    },
+    {
+        "role": "user",
+        "content": "Cross-Docking de una Fase"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking de una Fase:\nEn este enfoque, la separación de la mercadería se lleva a cabo al momento de la recepción de los productos en el centro de distribución. Al momento de recibir la mercadería, se escanean las etiquetas de los productos y se asignan directamente a los contenedores correspondientes.\nLuego, estos contenedores se envían a los destinos finales sin almacenamiento adicional."
+    },
+    {
+        "role": "user",
+        "content": "Creación de Cross-Docking de una Fase"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCreación de Cross-Docking de una Fase:\nPara iniciar el Cross-Docking de una fase, es fundamental tener previamente creada una agenda con detalles asociados.\nEste proceso se realiza sobre una agenda que está abierta pero no liberada, y que contiene los detalles necesarios para la asignación de productos. Solo se pueden asociar pedidos que tengan al menos un detalle que pueda ser atendido utilizando la agenda seleccionada.\nEs importante destacar que en esta modalidad de Cross-Docking no se permiten lotes AUTO en la agenda.\nPara iniciar este proceso, ingresar al Panel de recepción:\nUna vez allí, debe hacer click sobre el menú contextual (tres lineas horizontales) correspondiente a la agenda sobre la cual se desea crear el Cross-Docking y seleccionar la opción “Crear cross-docking”:\nEsta opción redirige a la siguiente pantalla donde se podrá seleccionar los pedidos que se deseen separar en este Cross-Docking:\nUna vez seleccionado el/los pedidos que se desean separar, el usuario debe moverlo a la grilla de pedidos asociados presionando el botón '->', y hacer click en el botón 'Iniciar cross Docking'."
+    },
+    {
+        "role": "user",
+        "content": "Liberación de Cross-Docking de una Fase"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nLiberación de Cross-Docking de una Fase:\nPara efectuar la liberación del cross-docking de múltiples agendas, se dispone de una función en el panel denominada 'Liberación de cross-docking':\nEsta opción redirigirá a la siguiente pantalla, donde el sistema solicitará al usuario que ingrese el número de empresa para la cuál hará todas las liberaciones de Cross-Docking pendientes.\nLuego de seleccionar la empresa, el usuario deberá presionar el botón 'Liberar' que aparece debajo del campo completado."
+    },
+    {
+        "role": "user",
+        "content": "Recepción en Etiquetas de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking de una Fase: Recepción en Etiquetas de Contenedores:\nLuego de iniciar el Cross-Docking, desde el Colector de Recepción, el usuario debe comenzar el flujo básico de recepción de mercadería, al leer un producto que esté pendiente en el pedido asociado, el sistema mostrará la información de ese pedido e indicará al usuario la cantidad de ese producto que debe separar.\nUna vez confirmada la cantidad, el sistema le solicitará al usuario que ingrese un contenedor de preparación Tras ingresarlo finaliza el flujo de recepción correctamente."
+    },
+    {
+        "role": "user",
+        "content": "Conversión de Etiquetas"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking de una Fase: Conversión de Etiquetas:\nPara completar el proceso de Cross-Docking y avanzar con el control y/o expedición de los contenedores, es crucial realizar la conversión de etiquetas a contenedores. Esto requiere que la agenda esté cerrada previamente.\nCuando se cierra una fase del Cross-Docking y aún quedan pedidos o remanentes sin atender, estos se liberan para su procesamiento a través de otras vías, como la liberación de onda.\nDurante la conversión de etiquetas de contenedores que recibieron la mercancía del Cross-Docking, se generan los detalles de picking asociados a la preparación correspondiente. Estos detalles de picking se generan ya preparados.\nSi los pedidos involucrados manejan lotes automáticos, este es el momento en el que se determinan los lotes específicos a partir de los lotes recibidos. Una vez completado este proceso, la operativa sigue su curso habitual.\nEs importante destacar que en este flujo no se requiere la liberación de onda, ya que la preparación se originó a través del Cross-Docking.\nEsta funcionalidad se encuentra dentro del submenú Cross-Docking del panel web:\nEsta opción redirige a la siguiente pantalla, donde se le solicitará al usuario que ingrese el número de agenda para el cual desea convertir la etiqueta.\nDebe seleccionar el dato que muestra la lista desplegable y presionar el botón 'transferir':\nEsta acción creará el detalle de la preparación permitiendo utilizar este contenedor con mercadería para controlar y/o realizar la expedición."
+    },
+    {
+        "role": "user",
+        "content": "Cross-Docking de dos Fases"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking de dos Fases:\nEn este caso, la separación de la mercadería se realiza después de que los productos han sido recibidos físicamente en el centro de distribución. Los productos se reciben con etiquetas de recepción generales, sin una asignación específica a los destinos finales.\nDespués de la recepción, se lleva a cabo una segunda fase donde la mercadería se separa en contenedores según los pedidos que deben ser atendidos. Esta separación se realiza utilizando las etiquetas de recepción de los productos.\nUna vez que los productos están agrupados en contenedores según los pedidos, se envían directamente a los destinos finales sin almacenamiento adicional."
+    },
+    {
+        "role": "user",
+        "content": "Creación de Cross-Docking de dos Fases"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCreación de Cross-Docking de dos Fases:\nEl Cross-docking de dos fases se crea sobre una agenda cerrada, permitiendo asociar pedidos que puedan ser atendidos por al menos un detalle con recepción efectiva en dicha agenda.\nEs importante destacar que la recepción de los productos se efectúa mediante una etiqueta de recepción tradicional (WISEL).\nUna vez cerrada la agenda, en el panel de Recepción, hacer click en el botón (tres lineas horizontales) de la  grilla y seleccionar 'Crear cross-docking'."
+    },
+    {
+        "role": "user",
+        "content": "Liberación de Cross-Docking de dos Fases"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nLiberación de Cross-Docking de dos Fases:\nEsta opción redirige a la siguiente pantalla donde se podrá seleccionar los pedidos que se deseen separar en este Cross-Docking:\nUna vez seleccionado el/los pedidos que se desean separar, el usuario debe moverlo a la grilla de pedidos asociados presionando el botón '->', y hacer click en el botón 'Iniciar cross-docking'."
+    },
+    {
+        "role": "user",
+        "content": "Colector de Cross-Docking"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCross-Docking de dos Fases: Colector de Cross-Docking:\nEl Colector “Cross-docking” facilita la transferencia de productos vinculados a una etiqueta de recepción tradicional (WISEL) hacia un contenedor, conforme a los pedidos establecidos en el proceso de Cross-Docking. Una vez iniciado el proceso desde el panel web, los usuarios deben acceder al Colector para llevar a cabo esta tarea.\nNota: En el proceso de Cross-Docking de dos Fases, se da prioridad sobre el almacenamiento. Sin embargo, dado que se trata de etiquetas de recepción tradicionales, cualquier remanente de productos que no se reserve durante el Cross-Docking puede ser almacenado.\nPara ingresar al colector “Cross-docking” debe dirigirse al menú Recepción > Cross-docking.\nEl sistema solicitará al usuario que ingrese el código de etiqueta, producto y luego confirme la cantidad del mismo:\nLuego de ingresar la cantidad a separar, el sistema solicitará un número de contenedor y una ubicación de transferencia donde se desea dejar el contenedor."
+    },
+    {
+        "role": "user",
+        "content": "Finalización de Cross-Docking de dos Fases"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFinalización de Cross-Docking de dos Fases:\nUna vez que se ha completado la separación de productos en el Colector, es necesario finalizar el proceso de Cross-Docking para controlar y/o expedir los contenedores utilizados.\nEn el caso del Cross-Docking de dos Fases, esta finalización debe realizarse manualmente a través del panel de recepción.\nAl hacerlo, los pedidos o remanentes no atendidos se desvinculan del Cross-Docking para ser atendidos por otras vías, como otro Cross-Docking o la Liberación de Onda.\nPara ello, desde el panel de Recepción, se debe presionar el botón  y seleccionar la opción “Finalizar cross-docking”."
+    },
+    {
+        "role": "user",
+        "content": "Mesa de Clasificación"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMesa de Clasificación:\nLa Mesa de Clasificación desempeña un papel importante en el proceso logístico luego de recibir la mercadería. Su objetivo principal es organizar y separar los productos para hacer más eficiente su almacenamiento posterior. Si se desea obtener más información sobre su funcionamiento, se puede consultar el manual 'Mesa de Clasificación'."
+    },
+    {
+        "role": "user",
+        "content": "Gestión de Stock"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGestión de Stock:\nEn la sección Gestión de stock, se exploran los aspectos clave para asegurar el control y la organización eficiente del stock dentro del almacén. La correcta gestión del stock es esencial para mantener la continuidad operativa y minimizar los costos asociados a la falta de productos o al exceso de inventario.\nEn esta sección se documentan procedimientos y herramientas como la consulta de movimientos de stock por producto, el manejo de unidades de transporte, los cambios de lote y vencimiento, la administración de equipos, controles de calidad, manejo de averías, reabastecimiento de ubicaciones y el módulo de producción."
+    },
+    {
+        "role": "user",
+        "content": "Consultas Avanzadas de Stock"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsultas Avanzadas de Stock:\nA continuación se detalla la operativa relacionada con la consulta de movimientos de stock por producto. Esta funcionalidad permite a los usuarios acceder de manera eficiente y detallada a la información sobre los movimientos de stock asociados a un producto específico, facilitando el seguimiento y la toma de decisiones informadas en la gestión de inventarios."
+    },
+    {
+        "role": "user",
+        "content": "Consulta de Movimientos de Stock por Producto"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsulta de Movimientos de Stock por Producto:\nLa consulta de movimientos de determinado producto en un período dado se realiza en la pantalla “Movimientos de stock por producto”. Para ingresar a la misma debe dirigirse al menú Stock > Consulta de movimientos de stock por producto.\nEn esta se página se pueden ver todos los movimientos de recepción, expedición y ajustes de stock para un producto en un período de tiempo determinado. Los movimientos y el stock son filtrados según el predio seleccionado en el cabezal del panel web. En caso de no seleccionarse predio (se encuentra la opción “S/D” en el campo del cabezal), se toman en cuenta todos los predios asignados al usuario.\nLa pantalla “Movimientos de stock por producto” se puede apreciar en la siguiente captura:\nPara obtener la información de los movimientos de un producto se deben de completar los siguientes campos del formulario:\n    • Empresa: empresa a la que pertenece el producto.\n    • Producto: producto del que se desea consultar sus movimientos.\n    • Fecha inicio (opcional): fecha inicial del período a consultar.\n    • Fecha fin (opcional): fecha final del período a consultar.\nUna vez completados los campos se debe presionar el botón 'Buscar'. Esto hará que se cargue la información solicitada en la grilla, además de los campos de stock que se encuentran en la parte superior de la misma.\nDe no completarse los campos Fecha inicio y Fecha fin los resultados corresponden a toda la historia del producto seleccionado.\nEn la siguiente imagen se muestra como ejemplo los movimientos del producto PR10 de la Empresa 1 en el período 21/02/2024 - 21/05/2024:\nEn la parte superior de la grilla existen tres campos de stock que se detallan a continuación:\n    • Stock total: stock actual del producto seleccionado.\n    • Stock inicio periodo: stock del producto seleccionado al momento de la fecha indicada en el campo Fecha inicio.\n    • Stock Fin periodo: stock del producto seleccionado al momento de la fecha indicada en el campo Fecha fin.\nEn la grilla se muestra la información de los movimientos del producto seleccionado para el período elegido. Algunos de los campos que se muestran son los siguientes:\n    • Fecha: fecha y hora del movimiento.\n    • Cód. agente: código del agente vinculado al movimiento.\n    • Cantidad: cantidad movilizada.\n    • Tipo movimiento: tipo del movimiento (AJUSTE, RECEPCION o EXPEDICION).\n    • Predio: predio correspondiente al movimiento.\nTambién se pueden consultar los movimientos de un producto específico desde el panel “Productos”. Para ello, desde la grilla del panel se debe abrir el menú contextual de la línea correspondiente al producto y presionar el botón 'Movimientos de Stock por Producto'.\nAl realizar esta acción, se redirige a la pantalla “Movimientos de stock por producto” con un filtro sobre la empresa y el producto asociados.\nPor ejemplo, en la siguiente imagen se muestra esta pantalla para el producto PR1 de la Empresa 2:\nAl realizar la búsqueda en esta pantalla no se admite el ingreso de los campos Empresa ni Producto en el formulario, ya que estos valores son tomados automáticamente del filtro de la página, permitiendo únicamente consultar movimientos del producto filtrado."
+    },
+    {
+        "role": "user",
+        "content": "Cambio de Lote"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCambio de Lote:\nEl sistema WIS permite cambiar el lote y/o vencimiento de productos que manejen al menos una de ambas características. Esta operativa se realiza desde el colector “Cambio de Lote”, el cual se encuentra en el menú Stock > Cambio de Lote como se muestra a continuación:\nEl primer campo a completar en esta pantalla es Ubicación. En este se debe leer la ubicación donde se encuentra el producto del cual se desea cambiar su lote y/o vencimiento.\nA continuación se debe leer el código del producto en el campo Producto.\nSi el producto maneja lote, en el campo Lote se debe ingresar el correspondiente al producto con el que se desea trabajar. En caso contrario, el flujo continúa como se detalla a continuación, pero con la posibilidad de cambiar únicamente el vencimiento del producto.\nEn el campo Cantidad se debe ingresar la cantidad del producto a la cual se va a realizar la modificación de lote y/o vencimiento.\nSi el producto maneja fecha de vencimiento, en el campo Nuevo Vencimiento se debe ingresar la nueva fecha de vencimiento para el producto seleccionado. En caso de querer cambiar sólamente el lote, se deberá ingresar el mismo vencimiento que tiene el producto seleccionado, el cual aparece en el campo Vencimiento.\nSi el producto maneja lote, en el campo Nuevo Lote se debe ingresar el nuevo lote. En caso de querer cambiar sólamente el vencimiento, se deberá ingresar el mismo lote que se ingresó en el campo Lote.\nPor último, se debe confirmar la acción ingresando el valor S en el campo Confirmar.\nCabe destacar que el cambio de lote se realiza sobre la cantidad seleccionada del producto, mientras que el cambio de vencimiento depende de si se cambian ambas propiedades o solo el vencimiento. Si se modifican ambas, el cambio de vencimiento aplica sobre la cantidad elegida del lote destino; si se cambia solo la fecha de vencimiento, aplica sobre toda la cantidad del producto/lote seleccionado en la ubicación leída."
+    },
+    {
+        "role": "user",
+        "content": "Manejo de Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nManejo de Unidades de Transporte:\nUna unidad de transporte (UT) es un agrupador de etiquetas (tanto de recepción como de contenedores) que permite agilizar la operativa de recepción y preparación a través del procesamiento masivo de dichas etiquetas en lugar de hacerlo individualmente.\nEn las etiquetas UT también se pueden asociar etiquetas de LPNs, tanto en la operativa de recepción como en la de preparación.\nEn el caso de la Recepción, las etiquetas de recepción tradicionales o LPNs se asocian a una UT y luego desde el colector “Almacenamiento Agrupado”, es posible almacenar la etiqueta UT una única vez, en lugar de almacenar cada una de las etiquetas de recepción por separado.\nDe forma análoga, en la operativa de picking las etiquetas de contenedor (etiquetas tradicionales o de LPN) pueden ser asociados a una UT y luego desde el colector “Carga camión” es posible cargar esta UT en lugar de cargar cada uno de sus contenedores asociados individualmente (siempre y cuando los contenedores estén asignados al camión).\nLa gestión sobre etiquetas de UTs se lleva a cabo en la pantalla “Consulta de UT” del panel web. Para ingresar a la misma debe dirigirse al menú Stock > Consulta de UTs.\nLas etiquetas de UT solo pueden ser utilizadas en un flujo operativo a la vez (recepción o preparación). A continuación se detalla la utilización de UTs en cada flujo."
+    },
+    {
+        "role": "user",
+        "content": "Flujo de recepción (almacenamiento agrupado)"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFlujo de recepción (almacenamiento agrupado):\nEn el colector 'Almacenamiento Agrupado', la etiqueta UT se debe leer en el campo Etiqueta:\nUna vez confirmada la UT, la operativa es igual que al trabajar con etiquetas de recepción o de LPN."
+    },
+    {
+        "role": "user",
+        "content": "Flujo de preparación (carga de camión)"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFlujo de preparación (carga de camión):\nEn el colector 'Carga camión', la etiqueta UT se debe leer en el campo Contenedor.\nEl resto de la operativa es igual a cuando se trabaja con etiquetas de contenedor tradicionales o LPN."
+    },
+    {
+        "role": "user",
+        "content": "Generación de Etiquetas para Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGeneración de Etiquetas para Unidades de Transporte:\nPara generar etiquetas de UTs se debe presionar el botón 'Generar etiquetas' del panel “Consulta de UTs”. Esto despliega un modal:\nAllí se debe completar el campo Cantidad a generar con la cantidad deseada y presionar el botón 'Confirmar'."
+    },
+    {
+        "role": "user",
+        "content": "Consulta de Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsulta de Unidades de Transporte:\nLa consulta de UTs se lleva a cabo en la grilla de la pantalla “Consulta de UTs”. En la misma se pueden ver datos como el Tipo de UT, Ubicación, Código de barras y demás campos referentes a las etiquetas de UTs.\nEn esta pantalla también se tiene la opción de imprimir las etiquetas. Para esto se seleccionan las casillas de las etiquetas deseadas y se presiona la opción en el menú contextual de la grilla."
+    },
+    {
+        "role": "user",
+        "content": "Asignación de Etiquetas a Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación de Etiquetas a Unidades de Transporte:\nTanto las etiquetas de recepción como las de contenedores pueden asociarse a UTs durante las operaciones de recepción y preparación, respectivamente, según los métodos descritos en esta sección. No obstante, es posible modificar estas asociaciones fuera de la operativa principal mediante colectores específicos, como se detallará en las secciones siguientes.\nPara asociar una etiqueta de recepción tradicional o LPN a una UT desde colectores en la operativa de recepción, hay que dirigirse al menú Recepción > Recepción.\nTras haber confirmado los datos de la primer pantalla, en la siguiente se debe leer la etiqueta de la UT en el campo Unidad de transporte.\nAl finalizar la recepción la etiqueta de la misma será asociada a la UT leída.\nPara asociar una etiqueta de contenedor tradicional o LPN a una UT desde colectores en la operativa de preparación, hay que dirigirse al menú Preparación > Preparación de picking.\nTras haber confirmado los datos de la primer pantalla, en la siguiente se debe leer la etiqueta de la UT en el campo Unidad de transporte.\nAl finalizar la preparación el contenedor será asociado a la UT leída."
+    },
+    {
+        "role": "user",
+        "content": "Colector de Asignación de Etiquetas de Recepción a Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nColector de Asignación de Etiquetas de Recepción a Unidades de Transporte:\nPara asignar o quitar etiquetas de recepción (tanto tradicionales como de LPN) de una UT se utiliza el colector “Asociar / Desasociar etiquetas de recepción a UTs”. Para ingresar al mismo debe dirigirse a Recepción > Asociar / Desasociar etiquetas de recepción a UTs.\nEn el primer campo se selecciona la opción correspondiente a la operación que se va a realizar: ASOCIAR o DESASOCIAR.\nLuego, en el campo Etiqueta, se debe leer la etiqueta de recepción o de LPN a asignar / quitar de la UT.\nPor último, si se eligió la opción ASOCIAR en el primer campo, se debe leer la etiqueta de la UT en el campo Etiqueta UT.\nSi se seleccionó la opción DESASOCIAR y la etiqueta de recepción leída pertenece a una UT, el campo Etiqueta UT se carga automáticamente.\nTras confirmar, la etiqueta queda asociada o desasociada de la UT, según la opción elegida."
+    },
+    {
+        "role": "user",
+        "content": "Colector de Asignación de Contenedores a Unidades de Transporte"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nColector de Asignación de Contenedores a Unidades de Transporte:\nPara asignar o quitar etiquetas de contenedor (tanto tradicionales como de LPN) de una UT se utiliza el colector “Asociar / Desasociar etiquetas de contenedores a UTs”. Para ingresar al mismo debe dirigirse a Manejo de Contenedores > Asociar / Desasociar etiquetas de contenedores a UTs.\nEn el primer campo se selecciona la opción correspondiente a la operación que se va a realizar: ASOCIAR o DESASOCIAR.\nLuego, en el campo Contenedor, se debe leer la etiqueta del contenedor a asignar / quitar de la UT.\nPor último, si se eligió la opción ASOCIAR en el primer campo, se debe leer la etiqueta de la UT en el campo Etiqueta UT.\nSi se seleccionó la opción DESASOCIAR y el contenedor leído pertenece a una UT, el campo Etiqueta UT se carga automáticamente.\nTras confirmar, el contenedor queda asociado o desasociado de la UT, según la opción elegida."
+    },
+    {
+        "role": "user",
+        "content": "Manejo de Equipos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nManejo de Equipos:\nLa definición y mantenimiento de los equipos se detalla en la sección Mantenimiento de Equipos de este documento. Estos no pueden ser utilizados simultáneamente por diferentes flujos operativos.\nLos equipos son utilizados dentro de dos operativas posibles:\n    • Transferencia de mercadería dentro del depósito.\n    • Movilización de contenedores durante la preparación.\nEn las siguientes dos secciones se detallan ambas operativas, las cuales se llevan a cabo en el colector “Descarga de equipo”. Este se encuentra dentro del menú Stock > Descarga de equipo."
+    },
+    {
+        "role": "user",
+        "content": "Descarga de Equipos con Mercadería en Transferencia"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga de Equipos con Mercadería en Transferencia:\nLa mercadería en transferencia es inicialmente asociada a un equipo durante la fase de carga y luego descargada en una ubicación de stock al término de la fase de descarga.\nEl operario puede optar por descargar la mercadería individualmente (flujo detallado en el “Manual Básico de Usuario”), o descargar simultáneamente un conjunto de productos.\nPara la descarga simultánea de un conjunto de productos es necesario que durante la carga del equipo la mercadería haya sido organizada en posiciones, cada una con una etiqueta distintiva propia, destinada a determinada ubicación de stock. En caso de que todas las posiciones del  equipo estén destinadas a una misma ubicación, la descarga será total. De lo contrario, será necesario indicar qué posición del equipo será descargada y toda la mercadería asociada a dicha posición será transferida a la ubicación destino.\nPara descargar simultáneamente un conjunto de productos, en el colector “Descarga de equipo” se debe leer el equipo correspondiente en el campo Equipo y seleccionar la opción DESCARGAR TRANSFERENCIA en el campo Modalidad de descarga. Un vez confirmada la modalidad se redirige a la pantalla “Descarga de Transferencia”.\nSi las etiquetas de posiciones del equipo tienen ubicación de destino asignada, el campo Ubicación destino será cargado con dicha información y se deberá confirmar esta ubicación en el campo Conf. Ubicación. \nEn caso contrario, en el campo Ubicación destino se deberá de ingresar una ubicación para la descarga de los productos asignados a una de las etiquetas de posición del equipo.\nPor último, se debe confirmar la etiqueta de posición que se está descargando actualmente en el campo Conf. Etiqueta."
+    },
+    {
+        "role": "user",
+        "content": "Descarga de Equipos con Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga de Equipos con Contenedores:\nDurante el picking los contenedores son asociados a equipos. Para moverlos a ubicaciones de tránsito, se puede optar por hacerlo contenedor a contenedor a través del colector de “Carga de Camión” (flujo detallado en el “Manual Básico de Usuario”), o movilizar simultáneamente un conjunto de contenedores asociados al equipo. Este último caso se detalla a continuación.\nEn el colector “Descarga de equipo” se debe leer el equipo que contiene los contenedores a ser transferidos en el campo Equipo.\nSi el equipo leído maneja posiciones, en el campo Modalidad de descarga se deberá elegir la opción DESCARGAR CONTENEDORES. De lo contrario, tras confirmar el equipo se redirige automáticamente a la siguiente pantalla.\nUna vez confirmada la modalidad se redirige a la pantalla “Descarga de Contenedores”.\nEn este formulario se debe completar el campo Opción, eligiendo entre las siguientes alternativas:\n    • DEJADO DE EQUIPO: se elige para mover el equipo a una nueva ubicación.\n    • TOTAL: se elige para descargar todos los contenedores en una única ubicación.\n    • PARCIAL: se elige para descargar los contenedores en ubicaciones independientes.\nEn el caso de seleccionar las opciones DEJADO DE EQUIPO o TOTAL, se despliegan los siguientes campos: 'Ubicación' y 'Confirmar'.\nSi se eligió la opción DEJADO DE EQUIPO, se debe confirmar la ubicación destino del equipo en el campo Ubicación.\nSi la opción seleccionada es TOTAL, en el campo Ubicación se debe leer la ubicación destino de todos los contenedores asociados al equipo.\nDe haber seleccionado la opción PARCIAL, se despliegan los siguientes campos: 'ubicación', 'Contenedor', 'ID Externo Contenedor', 'Confirmar'.\nEn este caso, para cada uno de los contenedores asociados al equipo se debe confirmar la ubicación destino en el campo Ubicación y la etiqueta del contenedor en Contenedor."
+    },
+    {
+        "role": "user",
+        "content": "Controles de Calidad"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nControles de Calidad:\nEsta sección se centra en la gestión de controles de calidad enfocados en la mercadería suelta, aspecto fundamental para garantizar la calidad de los productos. Se detallan  los  diferentes tipos de controles, cómo asignarlos y el proceso de aceptación."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Tipos de Controles de Calidad"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Tipos de Controles de Calidad:\nEn la gestión de calidad, se encuentran dos tipos de controles: Bloqueante y No Bloqueante.\nEn el control Bloqueante, la mercadería puede ser recibida, pero no se almacena en ubicaciones fijas hasta que el control de calidad sea aceptado.\nPor otro lado, en el control No Bloqueante, la recepción y el almacenamiento son posibles de manera inmediata. En ambos casos, el stock permanece no disponible para pickeos hasta que los controles de calidad sean aprobados."
+    },
+    {
+        "role": "user",
+        "content": "Asignación de Tipos de Controles de Calidad a Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación de Tipos de Controles de Calidad a Productos:\nLa asignación de controles de calidad se lleva a cabo a través del panel de Productos.\nPara ello, en la grilla se debe abrir el menú contextual (tes lineas horizontales) del registro correspondiente al producto al cual se desea asignar el control de calidad.\nA continuación, se selecciona la opción 'Controles de calidad'.\nEsta acción redirige a la siguiente pantalla:\nAquí se permite asignar un tipo de control de calidad al producto, haciendo click en la lista desplegable 'Seleccionar V' la cual mostrará los Tipos disponibles.\nAl finalizar se valida la operación presionando el botón 'Tick verde'."
+    },
+    {
+        "role": "user",
+        "content": "Generación de Controles de Calidad"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGeneración de Controles de Calidad:\nExisten dos formas distintas de generar controles de calidad: automáticamente, durante el proceso de recepción de mercadería, y de manera manual, cuando se requiere realizar un control sobre un producto específico en una ubicación determinada del stock.\nControles de calidad automáticos: Durante la recepción de mercadería, el sistema verifica si existen controles definidos para los productos recibidos. Si se han asociado previamente productos con tipos de control de calidad, se generan instancias de estos controles de forma automática con estado pendiente. Este proceso asegura que los controles se realicen de manera sistemática en los productos recibidos, sin necesidad de intervención manual adicional.\nInstanciación manual de controles de calidad: Por otro lado, la instanciación manual ocurre cuando se necesita realizar un control sobre un producto específico que ya está almacenado y no tiene controles pendientes.\nEn estos casos, se accede a una pantalla específica destinada a la creación manual de instancias de controles de calidad.\nPara acceder a esta pantalla, el usuario debe dirigirse a Stock > Controles de Calidad > Control de calidad en stock.\nEsta acción lleva a la siguiente pantalla, en la que se muestra una grilla con el stock de productos, sus correspondientes ubicaciones y otros datos.\nPara generar un control de calidad, se debe seleccionar de la lista desplegable el control que se desea aplicar.\nLuego, marcar las casillas de verificación de los productos a los cuales se les desea aplicar el control.\nFinalmente se debe presionar el botón 'Generar control de calidad'.\nEsto hará que los controles generados se muestren en la grilla de la pestaña 'Ubicaciones', en la pantalla “Aceptar controles de calidad”:"
+    },
+    {
+        "role": "user",
+        "content": "Aceptación de Controles de Calidad"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAceptación de Controles de Calidad:\nLa aceptación de controles de calidad se lleva a cabo a través de la pantalla 'Aceptar controles de calidad', disponible en el menú Stock del panel web.\nAquí se muestra una grilla con los controles de calidad pendientes. Para aceptarlos, se debe marcar la casilla de verificación y luego abrir el menú contextual de la grilla (tres lineas horizontales) y presionar la opción “Aceptar control”.\nSi se trata de mercadería no almacenada, los controles pendientes se encuentran en la pestaña 'Etiquetas'.\nSi los productos ya están almacenados, se localizan en la pestaña 'Ubicaciones'.\nEs importante destacar que los controles bloqueantes solo son visibles en la pestaña 'Etiquetas', dado que impiden el almacenamiento hasta su aceptación."
+    },
+    {
+        "role": "user",
+        "content": "Consulta de Controles de Calidad Aceptados"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsulta de Controles de Calidad Aceptados:\nSe podrán consultar los controles de calidad que han sido aceptados previamente, ingresando desde el panel web a la pantalla “Controles de calidad aceptados”:\nEsta opción lleva a la siguiente pantalla, donde en la grilla se listará el histórico de controles de calidad aceptados."
+    },
+    {
+        "role": "user",
+        "content": "Manejo de Averías"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nManejo de Averías:\nEl sistema permite gestionar el estado de avería de la mercadería de dos formas: administrativamente, desde el panel de stock por ubicaciones, y operativamente, desde el colector de averías en depósito.\nEn esta sección, se explica cómo señalar un producto o lote como averiado en una ubicación específica del depósito."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Administrativo de Averías"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Administrativo de Averías:\nLa gestión administrativa de averías se realiza desde el panel de stock por ubicaciones:\nAquí se muestra una grilla con todos los productos en stock y sus respectivas ubicaciones en el depósito.\nPara marcar un producto como averiado, primero se debe activar el alternador:\nEsta acción habilitará dos nuevas columnas en la grilla: “Cód. Motivo Avería” y “Motivo avería”:\nEl usuario deberá seleccionar el código del motivo y luego confirmar la acción presionando el botón 'tick verde' . Al finalizar, el motivo seleccionado se mostrará en la columna “Motivo avería”."
+    },
+    {
+        "role": "user",
+        "content": "Mantenimiento Operativo de Averías"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nMantenimiento Operativo de Averías:\nLa gestión operativa de averías se realiza desde el Colector de Averías depósito. En esta sección, se detalla cómo los operarios pueden marcar productos o lotes como averiados directamente desde el depósito.\nEn caso de que un determinado stock se encuentre parcialmente averiado, es fundamental que el operario realice una operación de transferencia para separar el stock averiado del sano. Este proceso garantiza una gestión precisa del inventario y evita que los productos defectuosos afecten las operaciones de distribución.\nPara marcar un stock averiado, el usuario debe dirigirse al Colector Averías de depósito:\nAllí el sistema solicitará al usuario que ingrese la ubicación del depósito donde se encuentra la mercadería averiada.\nLuego solicitará que  ingrese el producto y se marque su estado como averiado.\nAl finalizar, confirmar los datos ingresados."
+    },
+    {
+        "role": "user",
+        "content": "Transferencias"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nTransferencias:\nEn esta sección se abordan las operativas de transferencia que no se incluyeron en el “Manual Básico de Usuario” debido a su complejidad o rareza. En particular, se detalla la operativa de transferencia entre predios."
+    },
+    {
+        "role": "user",
+        "content": "Transferencias entre Predios"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nTransferencias entre Predios:\nLa transferencia entre predios se realiza a través del colector “Transferencia agrupada”. Para acceder al mismo, estando logueado en el predio origen, se debe navegar a Stock > Transferencia agrupada, como se muestra a continuación:\nPrimero, se debe escanear la etiqueta del equipo y la etiqueta de transferencia cargada con la mercadería a transferir en los campos correspondientes.\nEn el campo Modalidad, seleccionar la opción 'TRANSFERIR PREDIO'.\nUna vez seleccionada, el sistema redirige a la pantalla “Transferencia entre predios”.\nEn esta pantalla, es necesario completar el campo Ubicación transferencia leyendo la ubicación de transferencia del predio destino donde se alojará la etiqueta.\nTras escanear la ubicación, el sistema muestra un mensaje de confirmación.\nLuego, el usuario debe cerrar la sesión del colector y volver a iniciar sesión, esta vez seleccionando el predio destino.\nUna vez logueado en el predio destino, se debe ingresar nuevamente en el colector “Transferencia agrupada” y escanear la etiqueta de transferencia utilizada:\nTras escanear la etiqueta, el sistema redirige automáticamente a la pantalla “Descarga de etiqueta”:\nEn esta pantalla el usuario tendrá todas las opciones de descargas que se encuentran documentadas en el “Manual Básico de Usuario”.\nSi se selecciona la opción 'UBICAR', se podrá depositar la mercadería de la etiqueta en una ubicación de stock del predio destino, lo que permitirá su utilización en las operativas de dicho predio."
+    },
+    {
+        "role": "user",
+        "content": "Reabastecimiento"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nReabastecimiento:\nWIS cuenta con dos operativas de reabastecimiento de stock, las cuales tienen en común que incrementan el stock de determinada ubicación destino dentro del depósito.\nDependiendo de la operativa específica, se responde a distintas necesidades que se describen a continuación:\n    • Reabastecimiento por Etapas: utilizado para cubrir faltantes de productos reservados y poder atender los pedidos vinculados.\n    • Reabastecimiento de Ubicaciones bajas: utilizado para movilizar mercadería reservada y disponible a una ubicación más accesible para el operario.\nEn las secciones Colector de Reabastecimiento por Etapas y Colector de Reabastecimiento de Ubicaciones Bajas se detallan los pasos para llevar a cabo estas operativas en sus respectivos colectores."
+    },
+    {
+        "role": "user",
+        "content": "Colector de Reabastecimiento por Etapas"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nColector de Reabastecimiento por Etapas:\nEn general, cuando se prepara mercadería por medio de la liberación de onda, no es posible reservar más stock del disponible. No obstante, las ubicaciones de picking son un caso particular donde es posible reservar más mercadería de la disponible, lo cual genera una necesidad de reabastecimiento para poder atender el picking posteriormente. En tal sentido, las operativas de reabastecimiento buscan incrementar el stock en las ubicaciones de picking.\nDesde el colector “Reabastecimiento por etapas”, se lleva a cabo el reabastecimiento específicamente cuando el stock disponible no alcanza para atender toda la reserva o cuando se superan ciertos umbrales de stock configurables.\nPara ingresar al colector “Reabastecimiento por etapas” hay que dirigirse al menú Stock > Reabastecimiento por etapas.\nEn el campo Zonas, presionando el botón (tres lineas horizontales), se abrirá un menú donde se podrán seleccionar las zonas de ubicaciones con las que trabajar. Este campo es opcional.\nA continuación, se debe seleccionar la Modalidad extracción. Se podrá elegir entre las opciones TRADICIONAL o LPN, dependiendo si la mercadería para el reabastecimiento se desea extraer suelta o desde LPNs.\nEn el campo Reabastecer por se debe seleccionar entre las siguientes opciones:\n    • STOCK: crea un flujo de reabastecimiento contemplando la cercanía de productos en stock que deben ser reabastecidos.\n    • PICKING: crea un flujo de reabastecimiento en base al orden de las ubicaciones de picking.\nLuego, se debe seleccionar la modalidad a utilizar, la cual definirá el flujo de trabajo. Las opciones disponibles son:\n    • MINIMO: el colector armará un recorrido por ubicaciones de stock, respetando el FEFO y FIFO de los productos (según corresponda), para todos los productos que en las ubicaciones de picking se encuentren con stock por debajo del valor Stock mínimo.\n    • URGENTE: para utilizar esta modalidad, es necesario que existan pedidos liberados, ya que esta función trabaja en base a lo que un pedido necesita de la ubicación de picking, pero que no tiene stock suficiente para abastecerlo. El colector armará un listado con las ubicaciones que cumplan con esta condición y generará un reabastecimiento hasta el Stock máximo de la ubicación.\n    • FORZADO: genera un reabastecimiento para todas las ubicaciones de picking que necesiten mercadería, estén o no por debajo del Stock mínimo.\n    • MIN - URG: esta modalidad es una combinación de MINIMO Y URGENTE. Genera un listado con lo que está por debajo del Stock mínimo y lo que falta para los pedidos liberados.\n    • PRODUCTO: el reabastecimiento se lleva a cabo sobre las ubicaciones que contienen el producto leído por el usuario.\n    • DEMANDA: funciona de manera similar a la modalidad URGENTE, pero en vez de reabastecer la ubicación de picking hasta su Stock máximo, solo reabastece lo necesario para los pedidos pendientes.\nEn el campo Ubicaciones, se debe seleccionar las ubicaciones a considerar para el reabastecimiento. Las opciones disponibles son: TODAS, BAJAS y ALTAS.\nEn los campos de Rango se ingresa la altura mínima y máxima de las ubicaciones en las que se puede operar. Se pueden dejar vacíos para tomar el máximo rango posible.\nLuego, en el campo Equipo, se podrá leer la etiqueta del equipo a utilizar para el movimiento de mercadería. Si este campo se omite, el sistema asignará un equipo automáticamente.\nEl siguiente campo a completar en esta pantalla es Inicio, donde se puede ingresar la ubicación donde se comenzará con el flujo de reabastecimiento elegido. Este campo se puede omitir, en cuyo caso se tomará la primera ubicación que corresponda.\nFinalmente, dependiendo del flujo seleccionado, se deberá elegir el Tope Reabastecimiento, pudiendo seleccionar entre las opciones:\n    • HASTA EL MÁXIMO: se reabastece hasta la cantidad máxima de cada ubicación.\n    • MÁXIMO + RESERVA: se reabastece hasta la cantidad máxima más la cantidad de reserva de cada ubicación.\nUna vez completados todos los campos, se redirige a otra pantalla donde se guiará al usuario por las ubicaciones a reabastecer.\nEn el campo Ubicación se debe confirmar la lectura de la ubicación mostrada en Ubicación de Stock.\nLuego, en el campo Confirmar producto, se deberá leer el producto que se indica en el campo Producto.\nEl siguiente campo a completar es Unidades, donde se deberá ingresar la cantidad que se desea reabastecer en la ubicación seleccionada. Esta cantidad debe ser múltiplo del padrón correspondiente a la ubicación.\nPor último se debe leer una etiqueta de transferencia en el campo Etiqueta.\nUna vez leída la etiqueta de transferencia, el colector dirige a una nueva pantalla:\nEn esta pantalla, el usuario puede confirmar la descarga de la etiqueta de transferencia leyendo la ubicación de picking en el campo Confirmar ubicación de Picking, o puede confirmar con el campo vacío para continuar cargando la etiqueta.\nAl reabastecer la última ubicación que cumple con los criterios elegidos, se finaliza la operativa mostrando el siguiente mensaje: 'No hay más ubicaciones para abastecer según los criterios establecidos'"
+    },
+    {
+        "role": "user",
+        "content": "Colector de Reabastecimiento de Ubicaciones Bajas"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nColector de Reabastecimiento de Ubicaciones Bajas:\nEl objetivo del colector 'Reabastecimiento de Ubicaciones Bajas' es reubicar la mercadería reservada para facilitar el acceso al operario que realiza el picking.\nSe utiliza cuando la liberación de onda reserva mercadería en una ubicación de difícil acceso para el operario (por ejemplo, una ubicación muy alta) y se necesita moverla a una ubicación más conveniente a través de un montacarga.\nLa operativa consta de dos etapas:\n    1. Carga: la mercadería es reubicada temporalmente en una etiqueta de transferencia.\n    2. Descarga: la mercadería es transferida a la ubicación destino a partir de la etiqueta de transferencia.\nPara ingresar al colector “Reabastecimiento de ubicaciones bajas” hay que dirigirse al menú Stock > Reabastecimiento de ubicaciones bajas."
+    },
+    {
+        "role": "user",
+        "content": "Carga de Mercadería Reservada en Etiqueta de Transferencia"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCarga de Mercadería Reservada en Etiqueta de Transferencia:\nPara realizar la carga de mercadería en una etiqueta de transferencia, se debe seleccionar la opción CARGAR en el campo Operación.\nUna vez confirmada la operación CARGAR, el sistema solicita el ingreso de una Ubicación de inicio, campo que se puede dejar vacío para comenzar desde la primera ubicación que corresponda.\nSi el usuario no tiene ningún filtro de carga asociado, se lo redirige a la pantalla 'Configuración de filtros de Carga', donde deberá configurar un filtro para las ubicaciones y los detalles de picking pendientes (Configuración de filtros de Carga).\nSi el usuario cuenta con un filtro de carga asociado, el sistema lo redirige a la siguiente pantalla:\nEn esta pantalla se lleva el proceso de carga de forma guiada. El sistema va mostrando las ubicaciones y productos disponibles para cargar a una etiqueta de transferencia.\nPrimero se debe confirmar la ubicación sugerida por el colector, leyendo su etiqueta en el campo Conf. Ubic.\nLuego en el campo Conf. Prod. se debe leer la etiqueta del producto sugerido.\nEn el campo Cantidad se debe ingresar la cantidad a pickear del producto confirmado.\nPor último se debe leer la etiqueta de transferencia donde se cargará la cantidad del producto elegida. Esto se hace en el campo Etiqueta.\nPara saltar las ubicaciones o productos sugeridos por el sistema, se debe ingresar el valor 0 en el campo correspondiente.\nTras cargar los productos en la etiqueta de transferencia, el sistema presenta opciones de descarga. Estas operativas se detallan en la sección Descarga de Mercadería Reservada en Etiqueta de Transferencia."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de filtros de Carga"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de filtros de Carga:\nLos filtros de carga se utilizan para filtrar las ubicaciones y los detalles de picking pendientes que se utilizarán al momento de cargar los productos en etiquetas de transferencia.\nA continuación se detallan los campos a completar la pantalla “Configuración de filtros de Carga”:\n    • Zonas de Ubicaciones: desde el campo Zonas se debe abrir el menú (tres lineas horizontales)  y seleccionar las zonas de ubicaciones deseadas.\n    • Altura: se debe elegir la altura mínima y máxima de las ubicaciones en los campos Altura min. y Altura max. respectivamente. Si se dejan los campos vacíos, se tomará el máximo rango de altura de las ubicaciones.\n    • Empresa: en este campo se puede ingresar un número de empresa por el que se quiera filtrar o dejar el campo vacío.\n    • Filtros Temporales: ofrece la opción de configurar filtros temporales, los cuales son utilizados únicamente en la sesión actual del usuario. Para esto, se debe seleccionar la opción SI, lo cual despliega los siguientes campos: 'Preparaciones', 'Clientes', 'Pedidos'.\nEn estos se deben de seleccionar las Preparaciones, Clientes y Pedidos que se quieran tomar en cuenta al momento de realizar la operación de carga.\nPor último, se debe confirmar el guardado del filtro ingresando el valor S en el campo Guardar filtros. Esto guardará los filtros de zonas, alturas y empresa para el usuario, de modo que puedan ser utilizados en sesiones futuras. Además, los filtros temporales se guardarán para ser utilizados en la sesión actual."
+    },
+    {
+        "role": "user",
+        "content": "Descarga de Mercadería Reservada en Etiqueta de Transferencia"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga de Mercadería Reservada en Etiqueta de Transferencia:\nLa operativa de descarga cuenta con múltiples opciones para llevarla a cabo. A continuación se listan estas opciones:\n    • DESCARGA POR ETIQUETA: permite volcar de forma guiada los productos con la misma etiqueta de transferencia.\n    • DESCARGA POR PRODUCTO: permite agrupar de forma guiada los productos en las ubicaciones. El colector sugiere las ubicaciones donde existe stock del producto, mostrando la cantidad existente en cada ubicación y permitiendo desplazarse entre ellas.\n    • DESCARGA LIBRE: permite volcar productos especificados por el operario desde una etiqueta de transferencia en ubicaciones también especificadas por el usuario.\n    • DESCARGA TOTAL: permite volcar todo el contenido de una etiqueta de transferencia en una ubicación especificada por el operario.\nAl seleccionar alguna de estas opciones, si el usuario no tiene asignado un filtro de descarga se lo redirige a la pantalla “Configuración de filtros de Descarga” donde deberá configurar los filtros para la descarga de productos de las etiquetas de transferencia (Configuración de filtros de Descarga).\nEn las siguientes secciones se describe cómo se realiza la operativa para cada una de estas opciones."
+    },
+    {
+        "role": "user",
+        "content": "Descarga por etiqueta"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga por etiqueta:\nUna vez confirmada la operación DESCARGA POR ETIQUETA, el sistema solicita el ingreso de una Ubicación de inicio, campo que se puede dejar vacío para comenzar desde la primera ubicación que corresponda.\nAdemás se despliega el campo Etiqueta, en el que se deberá leer la etiqueta de transferencia que contiene los productos cargados en la operación de carga (Carga de Mercadería Reservada en Etiqueta de Transferencia).\nUna vez confirmada la lectura de la etiqueta de transferencia, se redirige a la siguiente pantalla:\nEn esta pantalla se irá guiando al usuario por las distintas ubicaciones y productos que se deberán descargar.\nPrimero se debe leer la ubicación mostrada por el sistema en el campo Conf. Ubic.\nEn el campo Conf. Producto se deberá leer la etiqueta del producto sugerido.\nPor último se debe ingresar la cantidad a descargar del producto en el campo Cantidad y confirmar con el valor S en el campo Confirmar.\nTras confirmar la descarga del último producto de la etiqueta, el sistema muestra el siguiente mensaje: 'Descarga realizada con éxito.'."
+    },
+    {
+        "role": "user",
+        "content": "Descarga por producto"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga por producto:\nUna vez confirmada la operación DESCARGA POR PRODUCTO, el sistema solicita el ingreso de una Ubicación de inicio, campo que se puede dejar vacío para comenzar desde la primera ubicación que corresponda.\nAdemás se despliega el campo Etiqueta, en el que se deberá leer la etiqueta de transferencia que contiene los productos cargados en la operación de carga (Carga de Mercadería Reservada en Etiqueta de Transferencia).\nUna vez confirmada la lectura de la etiqueta de transferencia, se redirige a la siguiente pantalla:\nEn esta pantalla se irá guiando al usuario por las distintas ubicaciones en las que existe stock del producto ingresado, para realizar la descarga sobre alguna de éstas.\nPrimero se debe leer la etiqueta del producto a descargar en el campo Producto.\nEn el campo Ubicación se muestra la ubicación sugerida. Para cada ubicación sugerida también se muestra el lote y cantidad que existe en dicha ubicación en los campos Lote en Stock y Cant. en stock respectivamente. Se puede cambiar a otras ubicaciones o ver el stock de otros lotes dentro de la misma ubicación utilizando los botones  'Flecha hacia arriba' o 'Flecha hacia abajo'.\nEn el campo Conf. Ubic se deberá leer la ubicación donde se desea realizar la descarga del producto.\nPor último se debe ingresar la cantidad a descargar del producto en el campo Cantidad y confirmar con el valor S en el campo Confirmar.\nTras confirmar la descarga del último producto de la etiqueta, el sistema muestra el siguiente mensaje: 'Descarga realizada con éxito.'."
+    },
+    {
+        "role": "user",
+        "content": "Descarga libre"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga libre:\nUna vez confirmada la operación DESCARGA LIBRE, el sistema despliega el campo Etiqueta, en el que se deberá leer la etiqueta de transferencia que contiene los productos cargados en la operación de carga (Carga de Mercadería Reservada en Etiqueta de Transferencia):\nUna vez confirmada la lectura de la etiqueta de transferencia, se redirige a la siguiente pantalla:\nEn esta pantalla, el operario deberá leer los productos que desea descargar desde la etiqueta de transferencia, seleccionar la cantidad de cada producto a descargar y especificar la ubicación de destino.\nEn el campo Producto, se debe escanear o ingresar la etiqueta del producto a descargar.\nLa cantidad del producto seleccionado que se desea descargar debe ingresarse en el campo Cantidad.\nFinalmente, se debe leer o ingresar la ubicación destino del producto en el campo Ubicación y confirmar con S en el campo Confirmar.\nUna vez confirmada la descarga del último producto de la etiqueta, el sistema mostrará el siguiente mensaje: 'Descarga realizada con éxito.'."
+    },
+    {
+        "role": "user",
+        "content": "Descarga total"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga total:\nUna vez confirmada la operación DESCARGA LIBRE, si el usuario tiene filtros de descarga asignados, el sistema muestra un mensaje indicando que los mismos no se tomarán en cuenta en esta modalidad, dando la opción de continuar o salir de la operativa.\nSi se elige continuar, el sistema despliega los campos necesarios para llevar a cabo la operativa:\nEn el campo Etiqueta, se debe leer la etiqueta de transferencia que contiene los productos cargados en la operación de carga (Carga de Mercadería Reservada en Etiqueta de Transferencia).\nLuego, en el campo Ubicación destino, se debe ingresar la ubicación donde se descargará todo el contenido de la etiqueta leída.\nPor último se debe confirmar la acción ingresando S en el campo Confirmar."
+    },
+    {
+        "role": "user",
+        "content": "Configuración de filtros de Descarga"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConfiguración de filtros de Descarga:\nAl igual que en la operativa de carga, la operativa de descarga utiliza filtros para las ubicaciones en las que se descargará la mercadería de las etiquetas de transferencia.\nLa pantalla “Configuración de filtros de Descarga”: La configuración que se debe realizar en esta pantalla es igual a la descrita en la sección Configuración de filtros de Carga."
+    },
+    {
+        "role": "user",
+        "content": "Consulta de Ubicaciones para Reabastecer"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsulta de Ubicaciones para Reabastecer:En el panel web existe la pantalla “Ubicaciones para reabastecer”, que tiene una grilla en la cual se pueden ver las ubicaciones de picking con algunos valores como: Stk. Disponible, Stk. Salida (indica que existen pedidos liberados por el valor de este campo en la ubicación), entre otros. Además, se muestran los campos Urgente, Mínimo y Forzado, que contienen el valor S o N según la ubicación esté o no preparada para reabastecer por esas modalidades (Colector de Reabastecimiento por Etapas). Particularmente, las líneas de la grilla que corresponden a ubicaciones cuyo campo Urgente tienen valor S, se marcan de color rojo claro.Desde este panel, también se pueden consultar las ubicaciones que contienen el producto a reabastecer para la ubicación de picking seleccionada. Para ello, se debe abrir el menú contextual correspondiente a la línea de la ubicación y presionar el botón 'Ubicaciones para reabastecer picking'. Esta acción redirige a una pantalla siguiente:\nEn la parte superior de esta pantalla, podremos ver los datos de la ubicación de picking / producto seleccionado.\nEn la grilla se muestran las ubicaciones que contienen el producto de la ubicación de picking y que podrían utilizarse para reabastecer dicha ubicación. Se muestran datos como los siguientes:\n    • Sirve Pick.: indica si el producto en esa ubicación es apto para el reabastecimiento. Por ejemplo, en la captura de pantalla se puede apreciar que la ubicación de la segunda línea tiene este campo con valor N debido a que el producto está vencido.\n    • Stk. Salida: muestra el stock reservado por pedidos liberados que se encuentra en esa ubicación.\n    • Stk. Libre: muestra el stock disponible para ser utilizado en esa ubicación. Es la cantidad potencialmente usada para reabastecer la ubicación de picking."
+    },
+    {
+        "role": "user",
+        "content": "Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nProducción:\nEl módulo de producción se utiliza para la conversión de insumos en productos finales dentro del depósito, mediante el uso de fórmulas que especifican las cantidades y tipos de insumos necesarios para obtener resultados específicos.\nPor ejemplo, es posible transformar componentes como procesadores, memorias RAM y discos duros en computadoras ensambladas, o crear paquetes promocionales combinando un smartphone con auriculares. En este contexto, el inventario se gestiona según los productos resultantes en lugar de sus componentes individuales.\nAdemás, los paquetes pueden descomponerse en sus partes originales después de una promoción utilizando otra fórmula, lo que facilita una gestión eficiente y precisa del inventario.\nWIS ofrece dos métodos de producción: Colector y Black Box.\nEl método Colector implica la creación de fórmulas de producción que detallan los insumos y los productos resultantes. Una vez definido lo necesario, el usuario puede utilizar el colector 'Ensamblado de fórmula' para ejecutar el proceso de producción.\nPor otro lado, la producción de tipo Black Box se centra en el consumo de insumos y la generación de productos finales, sin enfocarse en el proceso de fabricación en sí. Este método ofrece mayor flexibilidad en la gestión de insumos y productos, permitiendo contrastar la producción teórica con la producción real, y asegurando una gestión adaptable y eficiente de los recursos."
+    },
+    {
+        "role": "user",
+        "content": "Definición de Fórmulas sobre Productos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDefinición de Fórmulas sobre Productos:\nLas fórmulas de producción son esenciales para la transformación de productos en un entorno de depósito. Contienen los detalles de los insumos y los resultados obtenidos. En esta sección se explica cómo se definen y aplican, asegurando una gestión eficiente del inventario.\nPara iniciar con el proceso de producción, se debe acceder al menú Producción > Definición de fórmula.\nEn la grilla de este panel se muestran las fórmulas registradas en el sistema.\nPara crear una nueva fórmula, se debe presionar el botón 'Crear fórmula', lo que desplegará un modal:\nEn este modal, se solicitará al usuario ingresar los datos de la fórmula, como un código identificador, la empresa, un nombre y una descripción.\nEn la grilla 'Insumo', se deben ingresar los productos que se utilizarán como insumos en la producción, mientras que en la grilla 'Producido' se debe ingresar el o los productos resultantes que se obtendrán a partir de los insumos.\nEn este ejemplo, se observa que con 10 unidades del Producto A y 10 unidades del Producto B, se producen 10 unidades del Producto A+B.\nUna vez que los productos han sido agregados a la fórmula, se debe presionar el botón 'Crear'.\nTras crear la fórmula, será necesario ingresar la orden de producción, un proceso que se detalla en la sección Ingreso de Órdenes de Producción."
+    },
+    {
+        "role": "user",
+        "content": "Espacios de producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nEspacios de producción:\nLos espacios de producción son ubicaciones designadas dentro de un depósito donde se llevan a cabo las operativas de producción. Estos espacios son necesarios para poder gestionar los ingresos de órdenes de producción.\nEn el sistema WIS, cada espacio está configurado con cuatro ubicaciones específicas, cada una con un propósito diferente:\n    1. Entrada de insumos: donde se reciben los materiales necesarios para la producción.\n    2. Proceso de producción: donde se lleva a cabo el proceso de producción en sí mismo.\n    3. Salida de productos resultantes: para almacenar los productos resultantes después de la producción.\n    4. Salida de productos resultantes en etiqueta de transferencia: para almacenar los productos resultantes con una etiqueta de transferencia vinculada.\nLos códigos de estas ubicaciones siguen el siguiente formato:\n[Nº del predio] PRD [código del espacio] - [tipo de ubicación] 01\nDonde 'tipo de ubicación' se refiere al propósito que cumple la ubicación dentro del espacio de producción. En particular, para cada propósito específico, corresponden las siguientes iniciales:\n    • Entrada: E\n    • Producción: P\n    • Salida: S\n    • Salida Transferencia: ST\nA continuación se presentan algunos ejemplos de códigos de ubicaciones:\n    • Predio 1, espacio 150, ubicación de entrada: 1PRD150-E01\n    • Predio 1, espacio 214, ubicación de salida para transferencia: 1PRD214-ST01\n    • Predio 2, espacio 108, ubicación de producción: 2PRD108-P01\n    • Predio 2, espacio 110, ubicación de salida:  2PRD110-S01\nLa gestión de espacios de producción se lleva a cabo en el panel “Espacios de producción”. Para ingresar al mismo debe dirigirse al menú Producción > Espacios de producción:\nEn la grilla de esta pantalla se encuentran listados todos los espacios de producción registrados en el sistema.\nPara crear un nuevo espacio de producción se debe presionar el botón 'Agregar espacio'. Esto desplegará un modal:\nEn este modal, se deben completar los campos Predio y Descripción con la información correspondiente al nuevo espacio. Adicionalmente, se puede activar la opción Confirmación manual.\nSi Confirmación manual está activada, los insumos para la producción ingresarán primero en la ubicación de entrada del espacio y luego serán transferidos manualmente a la ubicación de producción. Si no se activa esta opción, los insumos ingresarán automáticamente en la ubicación de producción. Este proceso de abastecimiento se realiza utilizando el colector Abastecimiento de espacios de producción.\nUna vez completado el formulario se debe presionar el botón 'Crear'.\nDesde la grilla de este panel, también es posible editar los espacios cuyo ingreso a producción (Ingreso de Órdenes de Producción) esté con situación 'PRODUCCIÓN FINALIZADA', así como los espacios que no tengan ingreso asociado.\nPara editar un espacio de producción, se debe presionar el botón 'Editar' correspondiente a la línea del espacio en la grilla. Esto abrirá un modal:\nEn este modal es posible modificar la Descripción del espacio y ajustar el estado de la opción Confirmación manual según sea necesario.\nUna vez que se hayan realizado los cambios deseados, se debe presionar el botón 'Modificar'."
+    },
+    {
+        "role": "user",
+        "content": "Ingreso de Órdenes de Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nIngreso de Órdenes de Producción:\nPara crear nuevos ingresos de órdenes de producción, se debe acceder a la pantalla 'Ingreso de órdenes de producción'.\nPara ingresar a esta pantalla, hay que dirigirse al menú Producción > Ingreso a producción.\nEn la grilla de este panel se muestran todas los ingresos de órdenes ya registrados en el sistema.\nPara crear un nuevo ingreso, se debe presionar el botón . Esto desplegará un modal:\nEn el formulario de este modal, es necesario completar los campos Empresa y Predio con los valores correspondientes. En el campo Tipo, se puede seleccionar entre las siguientes opciones:\n    • Colector: se utiliza cuando se desea realizar la producción mediante el colector “Ensamblado de fórmula”.\n    • Black Box: se emplea para producciones del tipo homónimo.\nAdemás, el formulario contiene una serie de toggles que se detallan a continuación:\n    • Usar Fórmula: indica si la producción utiliza una fórmula ya existente.\n    • Generar Pedido: determina si al crear el ingreso se generará un pedido por los insumos. Si el Tipo seleccionado es “Colector”, este toggle no se puede modificar y permanece siempre habilitado.\n    • Generar Preparación: establece si al crear el ingreso se generará la preparación del pedido por los insumos. Este toggle solo está habilitado para utilizarse si el toggle Generar Pedido está activo.\nEn el caso de estar habilitada la opción Usar Fórmula, se muestran los campos Fórmula, Descripción y Cantidad.\nEn el campo Fórmula se debe buscar por el código de la fórmula y seleccionar el registro deseado. Al seleccionar una fórmula, la descripción de la misma se carga automáticamente en el campo Descripción.\nEn el campo Cantidad, se deberá ingresar la cantidad a producir del producto o los productos resultantes de la fórmula seleccionada. La cantidad total a producir será el resultado de multiplicar el número ingresado en este campo por la cantidad registrada del producto resultante en la fórmula.\nPor último, se podrá ingresar una descripción para el ingreso en el campo Referencia Externa.\nEn caso de no habilitar la opción Usar Fórmula, se deberán agregar registros en las grillas Entrada y Salida, ingresando los insumos en la primera y los productos resultantes en la segunda.\nPara finalizar el alta del nuevo ingreso, tras completar todos los campos requeridos, se deberá presionar el botón 'Crear'.\nSi al crear el ingreso se activó la opción Generar Preparación, el usuario podrá proceder a realizar el picking de la preparación generada. En caso contrario, será necesario crear primero una preparación desde la pantalla “Panel de Preparaciones”, asociando el pedido generado automáticamente si el toggle Generar Pedido estaba activado, o un pedido creado previamente desde la pantalla Planificación de Insumos si el toggle estaba desactivado.\nUna vez finalizado el picking, se podrá utilizar el colector Ensamblado de fórmula para producciones de tipo Colector.\nPara producciones de tipo Black Box, primero se deberá crear un espacio de producción o utilizar uno existente disponible (Espacios de producción) y asociarlo al ingreso (Asociar Espacio de Producción).\nLuego, se deberá iniciar la producción (Iniciar producción) y abastecer el espacio de producción con los insumos desde el colector Abastecimiento de espacios de producción.\nFinalmente, se podrá comenzar con la operativa de producción desde la pantalla Producir y Consumir."
+    },
+    {
+        "role": "user",
+        "content": "Planificación de Insumos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPlanificación de Insumos:\nEl objetivo de la pantalla “Planificación de Insumos” es planificar y gestionar los insumos necesarios para la producciones de tipo Black Box.\nEn esta pantalla se podrán realizar distintas acciones dependiendo si la producción elegida tiene o no espacio de producción asociado (Espacios de producción).\nSi la producción está asociada a un espacio de producción, en la pantalla se podrán realizar pedidos para dicha producción, consultar los pedidos realizados y generar reservas de los insumos. En caso contrario solo se podrá realizar pedidos y consultarlos.\nA esta pantalla se puede ingresar únicamente en ingresos de tipo Black Box que no se encuentren en situación “PRODUCCIÓN FINALIZADA”. Para acceder a la misma hay que dirigirse al menú contextual del ingreso deseado y seleccionar la opción 'Planificación de Insumos'.\nEn las siguientes secciones se describe esta pantalla, junto con su contenido y las opciones disponibles, tanto para ingresos con espacios de producción asociados como sin ellos."
+    },
+    {
+        "role": "user",
+        "content": "Producciones con Espacio Asociado"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nProducciones con Espacio Asociado:\nEn la pantalla “Planificación de Insumos” de una producción con espacio asociado se puede ver:\nEn la parte superior de la pantalla, se visualiza información relevante de la producción, que se detalla a continuación:\n    • Id Prod.: código interno del ingreso a producción.\n    • Id Prod. Externo: código externo del ingreso a producción.\n    • Tipo de Producción: tipo de la producción.\n    • Espacio de Prod.: código del espacio de producción.\n    • Desc. Espacio de Prod.: descripción del espacio de producción.\n    • Nu. Producción-Espacio: posición del ingreso en la cola de producciones del espacio.\nDebajo de esta información, se encuentra una grilla que muestra tanto los insumos requeridos por la fórmula de producción como los productos presentes en la ubicación de producción que no están vinculados a la fórmula.\nA la derecha de esta grilla, se encuentran los botones que permiten realizar acciones sobre los insumos.\nLa grilla incluye datos como el código del ingreso, código y descripción del producto, lote, cantidad disponible para reservar, cantidad reservada, cantidad pendiente, y el campo Requerido, que cuando tiene valor S indica que el producto es un insumo asociado a la fórmula. Además, están los campos Cantidad a Pedir y Cant. Reservar, utilizados para gestionar la reserva y el pedido de insumos.\nSi únicamente se desea generar una reserva de productos, se debe ingresar la cantidad a reservar en el campo Cant. Reservar de los registros correspondientes y presionar el botón 'Generar Solo Reserva'. Es importante que la cantidad a reservar no exceda la cantidad disponible.\nPara realizar un pedido de insumos y liberarlo para su preparación, se debe ingresar la cantidad a pedir en el campo Cantidad a Pedir de los registros correspondientes y presionar el botón 'Generar Pedido y Liberar'. Si solo se desea generar el pedido y no liberarlo, se debe presionar el botón 'Generar Pedido'.\nSi el producto que se desea pedir no está listado, se podrá insertar un nuevo registro en la grilla, seleccionando el código del producto en el campo Código e ingresando la cantidad a pedir.\nCabe destacar que al generar un pedido, también se realiza la reserva de los productos cuyo campo Cant. Reservar haya sido modificado.\nFinalmente, también existe la opción de visualizar los pedidos realizados para la producción actual. Para esto, se debe presionar el botón 'Ver Pedidos', lo que desplegará un modal:\nEn este modal, se podrán visualizar todos los pedidos de insumos realizados para la producción. Para ver los detalles de un pedido específico, se debe abrir el menú contextual del pedido y seleccionar la opción 'Detalles del Pedido'. Esto mostrará los productos incluidos en el pedido seleccionado."
+    },
+    {
+        "role": "user",
+        "content": "Producciones sin Espacio Asociado"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nProducciones sin Espacio Asociado:\nEn la siguiente imagen se puede apreciar la pantalla “Planificación de Insumos” de una producción con espacio asociado:\nEn la parte superior de la pantalla, se visualiza información relevante de la producción, que se detalla a continuación:\n    • Id Prod.: código interno del ingreso a producción.\n    • Id Prod. Externo: código externo del ingreso a producción.\n    • Tipo de Producción: tipo de la producción.\nDebajo de esta información, se encuentra una grilla que muestra los insumos requeridos por la fórmula de producción.\nA la derecha de esta grilla, se encuentran los botones que permiten realizar acciones sobre los insumos.\nLa grilla incluye datos como el código del ingreso, código y descripción del producto, lote, cantidad pendiente, cantidad planificada, entre otros. Además, está el campo Cantidad a Pedir, utilizado para gestionar el pedido de los insumos.\nPara realizar un pedido de insumos y liberarlo para su preparación, se debe ingresar la cantidad a pedir en el campo Cantidad a Pedir de los registros correspondientes y presionar el botón 'Generar Pedido y Liberar'. Si solo se desea generar el pedido y no liberarlo, se debe presionar el botón 'Generar Pedido'.\nSi el producto que se desea pedir no está listado, se podrá insertar un nuevo registro en la grilla, seleccionando el código del producto en el campo Código e ingresando la cantidad a pedir.\nFinalmente, también existe la opción de visualizar los pedidos realizados para la producción actual. Para esto, se debe presionar el botón 'Ver Pedidos', lo que desplegará un modal:\nEn este modal, se podrán visualizar todos los pedidos de insumos realizados para la producción. Para ver los detalles de un pedido específico, se debe abrir el menú contextual del pedido y seleccionar la opción 'Detalles del pedido'. Esto mostrará los productos incluidos en el pedido seleccionado."
+    },
+    {
+        "role": "user",
+        "content": "Asociar Espacio de Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsociar Espacio de Producción:\nPara asociar un espacio de producción a un ingreso, se debe abrir el menú contextual de la línea del ingreso en la grilla y presionar el botón 'Asociar Espacio de Producción'. Esto desplegará un modal:\nEn el campo Espacio de Producción, se deberá buscar el espacio a asociar, y la descripción del mismo se mostrará en dicho campo. Una vez seleccionado, para confirmar la asociación se deberá presionar el botón 'Asociar'.\nSi el espacio utilizado ya contiene ingresos asociados, el ingreso actual se posicionará al final de la cola de producciones asociadas. Solo se podrá iniciar la producción cuando todas las producciones anteriores hayan finalizado"
+    },
+    {
+        "role": "user",
+        "content": "Iniciar producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nIniciar producción:\nPara iniciar el proceso de producción de un ingreso, se debe abrir el menú contextual de la línea correspondiente en la grilla y presionar el botón 'Iniciar Producción'.\nAl hacer esto, el estado del ingreso cambiará su situación a 'PRODUCCIÓN INICIADA', lo que permitirá abastecer el espacio de producción asociado (ver sección Abastecimiento de espacios de producción).\nPosteriormente, se podrá proceder con la operativa de producción, la cual se detalla en la siguiente sección, Producir y consumir."
+    },
+    {
+        "role": "user",
+        "content": "Producir y consumir"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nProducir y consumir:\nEl proceso de producción y consumo de insumos en producciones de tipo Black Box se realiza en la pantalla del panel web denominada 'Producir y Consumir'. Para acceder a esta pantalla, es necesario abrir el menú contextual de la línea correspondiente al ingreso y presionar el botón 'Producir y consumir':\nEste panel está dividido en tres partes, que se detallan en las siguientes secciones."
+    },
+    {
+        "role": "user",
+        "content": "Formulario"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFormulario:\nEn la parte superior de la pantalla “Producir y Consumir” se encuentra un formulario que muestra información detallada sobre la producción en curso. Los datos presentados en este formulario son los siguientes:\n    • Producción: código interno del ingreso a producción.\n    • Id. Externo Producción: código externo del ingreso a producción.\n    • Descripción: descripción del ingreso a producción.\n    • Tipo Estación: tipo de producción del ingreso asociado al espacio de producción.\n    • Id Estación: código del espacio de producción.\n    • Estación: descripción del espacio de producción.\n    • Ubicación Entrada: código de la ubicación de entrada del espacio de producción.\n    • Ubicación Producción: código de la ubicación de producción del espacio de producción.\n    • Ubicación Salida: código de la ubicación de salida del espacio de producción.\n    • Ubicación Salida Transferencia: código de la ubicación de salida transferencia del espacio de producción.\n    • Lote a Utilizar: lote que se utilizará en los productos producidos, si estos manejan lote y en la fórmula se registraron con lote “AUTO”.\nAdemás aparece el campo Modalidad Lote, que permite al usuario seleccionar la modalidad para asignar el lote a los productos producidos, en caso de que estos manejen lote y hayan sido registrados con lote “AUTO” en la fórmula.\nLas modalidades disponibles son:\n    • MAN - Especificación manual: el lote es especificado por el usuario en el campo Lote a Utilizar.\n    • IDI - Lote igual al Id Interno de producción: se asigna el código interno del ingreso como lote.\n    • IDE - Lote igual al Id Externo de producción: se asigna el código externo del ingreso como lote.\n    • LFD - Lote igual a la fecha del día: se asigna la fecha del día como lote.\n    • LPM - Lote igual al mes de producción: se asigna el mes de la producción como lote.\nEl formulario también incluye dos botones:\n    • Notificar: permite comunicar a sistemas externos el avance de la producción en tiempo real. Al presionarlo, se envía una notificación que actualiza los sistemas externos con la información más reciente sobre el estado de la producción, asegurando que estos  estén sincronizados con WIS.\n    • Finalizar: se utiliza para concluir la producción en curso. Al presionarlo, se cierra el proceso productivo, actualizando el estado del ingreso a 'PRODUCCIÓN PEND. NOTIF. FINAL', indicando que el ingreso está pendiente de notificación final a los sistemas externos.\nSi al finalizar una producción se detectan diferencias entre la producción planificada o el consumo planificado, o si quedan materiales producidos o insumos en el espacio de producción, el sistema despliega un modal de advertencia. Este modal presenta las situaciones que requieren confirmación previa a la finalización de la producción:\nEn este ejemplo, se aprecian las cuatro situaciones que requieren confirmación del usuario antes de finalizar la producción. Para cada una de estas situaciones, se presenta una grilla que proporciona información relevante sobre los eventos que dieron lugar a esas discrepancias.\nEn la grilla 'Producción Diferente': De visualizan productos producidos no esperados (en este caso 3 unidades del producto PR1) y productos esperados con diferencias en las cantidades producidas (0 unidades producidas del Producto A+B frente a las 10 unidades planificadas).\nLa grilla 'Consumo Diferente': Detalla la información de insumos asociados a la fórmula de producción que tuvieron diferencias en las cantidades consumidas. En este ejemplo, se observa que no se consumieron las 10 unidades planificadas para los productos Producto A y Producto B.\nLa grilla 'Remanente de Producción': contiene información sobre productos producidos que no fueron expulsados del espacio de producción. En este caso, faltó expulsar 1 unidad del producto PR1.\nFinalmente, la grilla 'Remanente de Insumos' presenta los productos asociados a la fórmula de producción que no fueron consumidos ni desafectados, así como cualquier producto producido no esperado que haya quedado en el espacio sin consumir, desafectar o expulsar. En el ejemplo, se observa una cantidad remanente de 10 unidades de los productos Producto A y Producto B, junto con 1 unidad del producto PR1."
+    },
+    {
+        "role": "user",
+        "content": "Grillas del Proceso de Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGrillas del Proceso de Producción:\nDebajo del formulario se encuentra una sección con tres pestañas, donde cada una contiene una grilla dedicada a una operación específica en el proceso de producción. A continuación se nombran cada una de ellas:\nConsumir:\nEn esta pestaña se lleva a cabo el consumo de los insumos utilizados en la producción. Aquí se pueden consumir tanto los insumos asociados a la fórmula como cualquier producto generado durante el proceso de producción o productos del espacio que quedaron de producciones anteriores.\nAdemás de consumir insumos, es posible desafectarlos de la producción. Esto implica que los insumos se desvinculan de la producción actual, pero permanecen disponibles para utilizarlos en producciones futuras dentro de la misma ubicación de producción.\nEsta pestaña contiene una grilla, los botones 'Consumir Completo' y 'Desafectar', y un toggle denominado 'Ver líneas sin saldo'.\nLa grilla muestra información de los productos, como su código, descripción, lote, cantidad notificada al sistema externo, cantidad real, cantidad original, cantidad desafectada, entre otros.\nUna de las columnas destacadas en la grilla es Consumible. Cuando un producto tiene este campo con valor S, indica que el mismo está disponible en el espacio, pero no está vinculado como insumo al ingreso. Esto puede ocurrir por distintos motivos:\n    • El producto fue desafectado en una producción anterior en ese espacio.\n    • El producto no fue consumido ni expulsado de alguna producción anterior en ese espacio.\n    • Es un producto resultante de la producción actual.\nSi el toggle Ver líneas sin saldo está activado, la grilla también mostrará los registros de productos que han sido consumidos en su totalidad.\nUn insumo se puede consumir de forma parcial o total.\nPara consumir toda la cantidad de un producto, se debe marcar la casilla correspondiente en la grilla y presionar el botón 'Consumir Completo'.\nPara consumir un insumo de forma parcial, se debe abrir el menú contextual del registro correspondiente (tres lineas horizontales) y seleccionar la opción 'Consumir Parcial'. Esto desplegará un modal:\nEn este modal, se debe ingresar la cantidad a consumir en el campo Consumo.\nSi se trata de una cantidad sobrante, se tiene la opción de indicarlo activando el toggle Es Sobrante.\nPara confirmar el consumo, se debe presionar el botón 'Confirmar'.\nPara desafectar un producto de la producción actual, se debe marcar la casilla correspondiente en la grilla y presionar el botón 'Desafectar'.\nProducir:\nEsta pestaña está destinada al proceso de producción, permitiendo tanto la producción de productos esperados (aquellos que forman parte de la fórmula de producción) como de productos no esperados:\nEsta pestaña contiene una grilla y los botones 'Producir' y 'Producir No Esperado'.\nLa grilla muestra información de los productos esperados como resultado de la fórmula de producción, incluyendo datos como el código del ingreso, el código y descripción del producto, su lote, cantidad producida, entre otros.\nPara producir un producto esperado, se debe ingresar la cantidad a producir en el campo 'Cant. a Producir' de la línea correspondiente al producto y presionar el botón 'Producir'. Si en la fórmula de producción el producto esperado fue asignado con lote “AUTO”, se deberá seleccionar la Modalidad Lote del formulario. Si la modalidad seleccionada es 'MAN - Especificación manual', también se deberá completar el campo 'Lote a Utilizar'.\nPara producir un producto no esperado, se debe seleccionar el campo del formulario 'Modalidad Lote' y completar el campo 'Lote a Utilizar' si la modalidad elegida es 'MAN - Especificación manual'. Luego, se debe presionar el botón 'Producir No Esperado', lo que desplegará el siguiente modal:\nEn este modal se debe seleccionar el producto, ingresar la fecha de vencimiento si corresponde, la cantidad a producir, el motivo de dicha producción, y opcionalmente, se podrán ingresar observaciones.\nTras completar los datos se deberá presionar el botón 'Confirmar'.\nExpulsar:\nDentro de esta pestaña se pueden expulsar, de forma total o parcial, los productos resultantes de la producción, con la opción de expulsarlos sueltos o asociados a una etiqueta de transferencia.\nCuando un producto se expulsa suelto, queda almacenado en la ubicación de salida del espacio de producción. En cambio, al expulsarlo asociado a una etiqueta de transferencia, se sitúa en la ubicación de salida en transferencia del espacio:\nEsta pestaña contiene una grilla, los botones 'Expulsar Suelto' y 'Expulsar con Transferencia', y el campo Impresora.\nLa grilla muestra información de los productos disponibles para ser expulsados de la producción, con detalles como el código de la ubicación de producción, la empresa, el código y descripción del producto, el lote, la cantidad en stock, entre otros.\nPara expulsar la cantidad total de un producto, en la grilla se debe seleccionar la casilla correspondiente al mismo y presionar el botón 'Expulsar Suelto' para expulsarlo suelto, o 'Expulsar con Transferencia' para expulsarlo asociado a una etiqueta de transferencia.\nSi se desea expulsar una cantidad específica de un producto, se debe ingresar la cantidad en el campo Cant. Expulsar de la grilla, y luego presionar el botón correspondiente a la modalidad de expulsión.\nCuando se utiliza la opción de expulsar con transferencia, es necesario haber seleccionado previamente un equipo en el campo Impresora, destinado a la impresión de la nueva etiqueta de transferencia. Una vez se confirma la expulsión, el sistema muestra un mensaje con el número de etiqueta generado.\nAdemás, al consultar el panel “Etiquetas de transferencia”, el registro de la misma mostrará el código del ingreso a producción en el campo Información adicional."
+    },
+    {
+        "role": "user",
+        "content": "Grillas de Información"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nGrillas de Información:\nDebajo de las grillas utilizadas en el proceso de producción, se encuentran unas pestañas que contienen grillas con información relevante sobre la producción seleccionada. A continuación, se describen las grillas de estas pestañas:\nStock en Producción:\nEsta grilla muestra información sobre los productos presentes en la ubicación de producción asociada al ingreso. Aquí se visualizan tanto los insumos como los productos que se están produciendo, presentando detalles como su código, descripción, la empresa a la que pertenecen, el código de la ubicación de producción, entre otros datos relevantes.\nA continuación, se presenta un ejemplo de la información que se visualiza en esta grilla durante diferentes etapas de la producción:\nInicialmente se observa que al comienzo de la producción hay una cantidad de 10 unidades tanto del Producto A como del Producto B.\nEn la segunda etapa se nota que la cantidad de estos productos ha disminuido a 9 unidades y aparece 1 unidad del Producto A+B. Esto ocurrió al producir 1 unidad de Producto A+B, consumiendo 1 unidad de Producto A y 1 unidad de Producto B.\nDespués de expulsar el Producto A+B, la grilla muestra la siguiente información:\nEn esta etapa, el Producto A+B ya no aparece en la grilla, ya que ha sido transferido a la ubicación de salida del espacio de producción.\nProductos Esperados:\nEsta grilla muestra información sobre los productos resultantes esperados de la producción, es decir, productos asociados al resultado de la fórmula de la producción. Se presentan detalles como el código y la descripción de los productos, el lote, la cantidad producida, la fecha y hora de producción, su vencimiento, entre otros datos relevantes.\nContinuando con el ejemplo presentado en la grilla Stock en Producción, en la siguiente imagen podemos ver esta grilla con información del Producto A+B.\nProductos No Esperados:\nEsta grilla muestra información sobre productos no esperados que resultan de la producción en curso. Estos productos no forman parte de la fórmula asociada a la producción. Se presentan detalles como el código y la descripción de los productos, el lote, la cantidad producida, la fecha y hora de producción, su vencimiento, entre otros datos relevantes."
+    },
+    {
+        "role": "user",
+        "content": "Detalles Teóricos"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDetalles Teóricos:\nEl modal 'Detalles Teóricos' proporciona información detallada sobre los insumos y productos resultantes de la fórmula vinculada a una producción específica.\nPara acceder a estos detalles teóricos, en la grilla de ingresos, se debe abrir el menú contextual del ingreso correspondiente y seleccionar la opción 'Detalles Teóricos':\nEn este modal se presentan dos grillas: la grilla 'Entrada', donde se visualizan los datos y cantidades teóricas de los insumos de la producción seleccionada, y la grilla 'Salida', que muestra la información sobre los productos resultantes y sus cantidades teóricas."
+    },
+    {
+        "role": "user",
+        "content": "Detalles de la Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDetalles de la Producción:\nEl modal 'Detalles de la Producción' proporciona información detallada sobre los insumos consumidos y los productos generados durante una producción.\nPara acceder a estos detalles, en la grilla de ingresos, se debe abrir el menú contextual del ingreso correspondiente y seleccionar la opción 'Detalle de la Produción'. Esta opción solo está disponible si se consumió o produjo algún producto en la producción seleccionada.\nA continuación, se describe un ejemplo de este modal:\nEn la parte superior del modal, se visualizan campos con información general sobre la producción, incluyendo:\n    • Producción: código interno de la producción.\n    • Id. Externo Producción: código externo de la producción.\n    • Descripción: descripción de la producción.\nDebajo de estos campos, se encuentran dos grillas: 'Insumos Consumidos' y 'Salidas Generadas'.\n    • Insumos Consumidos: muestra información sobre los productos consumidos en la producción, como el código del producto, su descripción, lote, cantidad desafectada, cantidad notificada al sistema externo, entre otros.\n    • Salidas Generadas: presenta detalles sobre los productos producidos, incluyendo campos como código y descripción del producto, lote, cantidad producida, cantidad notificada al sistema externo, entre otros."
+    },
+    {
+        "role": "user",
+        "content": "Abastecimiento de espacios de producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAbastecimiento de espacios de producción:\nEl colector “Abastecimiento de espacios de producción” se encarga de suministrar los insumos necesarios a los espacios de producción que están vinculados a un ingreso específico. Estos insumos son aquellos solicitados en el pedido de dicho ingreso. Para poder comenzar con el abastecimiento de un espacio de producción es necesario que el ingreso de la orden de producción asociada esté iniciado. Esta operativa se detalla en la sección Ingreso de Órdenes de Producción - Iniciar producción.\nPara acceder a este colector, debe dirigirse al menú Producción > Abastecimiento de espacios de producción.\nEn el campo Contenedor, se debe leer la etiqueta del contenedor utilizado al momento de realizar el picking del pedido por los insumos.\nLuego, el sistema redirige automáticamente al campo Ubicación. Este campo debe completarse con la Ubic. Entrada del espacio. Según el estado del campo Confirmación manual del espacio con el que se está trabajando sucede lo siguiente:\n    • Confirmación manual desactivada: los insumos se trasladarán automáticamente a la Ubic. Producción del espacio, quedando listos para su uso en el proceso de producción.\n    • Confirmación manual activada: Los insumos permanecerán en la Ubic. Entrada del espacio. Para moverlos desde la Ubic. Entrada a la Ubic. Producción, será necesario repetir esta operativa, ingresando la Ubic. Producción en el campo de Ubicación.\nFinalmente, se deberá confirmar la operación ingresando S en el campo Confirmar (S/N)."
+    },
+    {
+        "role": "user",
+        "content": "Ensamblado de Fórmulas"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nEnsamblado de Fórmulas:\nLas producciones de ingresos de tipo Colector se llevan a cabo en el colector 'Ensamblado de fórmula'. Para ingresar a esta funcionalidad, se debe ir a Producción > Ensamblado de fórmula.En el campo Contenedor de esta pantalla, se debe escanear la etiqueta del contenedor utilizado para el picking del pedido por los insumos de la producción.Luego, en Ubicación se debe escanear la ubicación destino del producto o los productos resultantes de la fórmula vinculada al ingreso.Una vez confirmada la lectura de la ubicación, se genera en ella la cantidad configurada de los productos resultantes de la fórmula asociada, multiplicada por el valor del campo Cantidad de fórmulas configurado al crear el ingreso (Ingreso de Órdenes de Producción).Si la cantidad producida coincide con la teórica (Detalles Teóricos), se cambia la situación de la producción a 'PRODUCCIÓN FINALIZADA' y se notifica a sistemas externos sobre el fin de la producción."
+    },
+    {
+        "role": "user",
+        "content": "Anulación de Preparaciones de Producción"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAnulación de Preparaciones de Producción:\nEn los ingresos a producción de tipo Colector, pueden ocurrir situaciones en las que se anule el pedido o la preparación vinculada a la producción, lo que provoca la finalización automática de la misma. En estos casos, el estado de la producción cambia a 'PRODUCCIÓN FINALIZADA' y se notifica a sistemas externos sobre su finalización.\nA continuación, se detallan las situaciones mencionadas anteriormente:\n    • Se anula completamente el remanente pendiente de preparar y los detalles del pedido asociado, utilizando el panel 'Anulación de Preparaciones' con el toggle en la opción 'Preparación y Pedido'.\n    • Se anula completamente el remanente pendiente de preparar mediante el panel 'Anulación de Preparaciones', con el toggle en la opción 'Preparación', y posteriormente se anulan los detalles pendientes de liberar del pedido a través del panel 'Eliminar pedidos pendientes'."
+    },
+    {
+        "role": "user",
+        "content": "Preparación"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPreparación:\nEn esta sección, se abordan temas cruciales para optimizar la eficiencia en el proceso de preparación de pedidos. La preparación es una etapa fundamental en la logística y el manejo de almacenes, donde se asegura que los productos sean recogidos y listos para su expedición de manera efectiva.\nSe incluyen temas como la liberación automática de preparaciones y operaciones avanzadas sobre contenedores, donde se detalla la partición, consolidación y control de contenedores."
+    },
+    {
+        "role": "user",
+        "content": "Liberación automática de preparaciones"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nLiberación automática de preparaciones:\nWIS permite definir reglas para liberar ondas de preparaciones automáticamente. Un ejemplo podría ser que para el cliente A de la empresa 1 se libere la onda con sus pedidos los martes a partir de las 05:00AM.\nEstas reglas se manejan en la pantalla “Liberación automática” del panel web. Para ingresar a la misma hay que dirigirse al menú Preparación > Preparación > Liberación automática.\nEn la grilla de esta pantalla se puede ver la información de todas las reglas definidas para la liberación automática de preparaciones."
+    },
+    {
+        "role": "user",
+        "content": "Creación de Reglas de Liberación Automática"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nCreación de Reglas de Liberación Automática:\nPara crear una nueva regla se debe presionar el botón 'Crear Regla'. Esta acción despliega el siguiente modal:\nEn este modal se deben de ingresar los siguientes campos:\n    • Descripción: descripción que representa a la regla.\n    • Nro. Orden: valor numérico utilizado para ordenar la liberación automática de las reglas pendientes de liberar. La liberación asociada a las reglas se ordenan a través de este número de forma ascendente.\n    • Activa: indica el estado de la regla. Sólo cuando este campo está activo la regla es procesada por el sistema y se tiene la opción de ejecutarla manualmente (Ejecución Manual de Reglas de Liberación Automática).\n    • Respetar intervalos: determina la forma en la que se procesan las reglas pendientes de liberar. Cuando este campo está activo no se toma en cuenta la última fecha de ejecución, sino que dependiendo de la frecuencia en que se haya realizado la liberación de la regla, se calcula el intervalo previo en que se debería haber ejecutado. Esto sucede porque en los casos que las reglas se ejecuten manualmente, podrían llegar a moverse las horas de ejecución de las mismas.\n    • Fecha de inicio: fecha que comienza a ejecutarse la regla.\n    • Fecha de finalización: fecha que finaliza la ejecución de la regla.\n    • Tipo: tipo de intervalo para la ejecución. Minutos, horas o diario.\n    • Repetir cada: número que representa cada cuanto se repite la ejecución de la regla. Corresponde con el Tipo seleccionado. Por ejemplo: Repetir cada: 30 - Tipo: minutos.\n    • Hora de inicio: hora que comienza a ejecutarse la regla.\n    • Hora de finalización: hora que finaliza la ejecución de la regla.\n    • Días: selección de los días de la semana que se ejecutará la regla.\nTras completar estos datos se debe presionar el botón 'Configuración de Liberación'. Esto redirigirá al siguiente modal:\nEn el formulario de este modal se presentan las opciones de configuración para la liberación de la onda. A continuación se detallan los campos del formulario:\n    • Ubicación completa: este parámetro aplica si se cuenta con ubicaciones de picking. Puede tener los siguientes valores:\n        ◦ Buscar antes: antes de ir a las ubicaciones de picking, intenta liberar en ubicaciones de stock cuya cantidad se consuma totalmente.\n        ◦ No buscar: no considera ubicaciones de stock cuya cantidad se consuma totalmente.\n        ◦ Si supera máximo: busca ubicaciones de stock cuya cantidad se consuma totalmente cuando la cantidad a liberar supera el desborde de la ubicación de picking.\n    • Ubicación incompleta: este parámetro aplica si se cuenta con ubicaciones de picking. Puede tener los siguientes valores:\n        ◦ Buscar antes: antes de ir a las ubicaciones de picking intenta liberar en ubicaciones de stock.\n        ◦ No buscar: no considera ubicaciones de stock.\n        ◦ Si supera máximo: busca ubicaciones de stock cuando la cantidad a liberar supera el desborde de la ubicación de picking.\n    • Stock: define el orden en que se recorre el stock para ir liberando los pedidos y determina cual es el stock disponible. Puede tener los siguientes valores:\n        ◦ MENUDENCIAS (FIFO_ASCNOVENC): recorre según el vencimiento ascendente en ubicaciones, no considera el stock vencido.\n        ◦ ALMACÉN (FIFO_ASCNOVENC_STK):\n    • Pedidos:\n    • Liberar por unidades:\n    • Liberar por curvas:\n    • Maneja vida útil:\n    • Agrupación: define cómo se agrupa la mercadería al momento de ser preparada. La agrupación es considerada para cotejar con el desborde de la ubicación de picking. Puede tener los siguientes valores:\n        ◦ Pedido: solicita preparar la mercadería para cada pedido.\n        ◦ Cliente: solicita la mercadería a preparar agrupando todos los pedidos del mismo cliente.\n        ◦ Ruta: solicita la mercadería a preparar agrupando todos los pedidos/clientes de la misma ruta.\n        ◦ Onda: solicita la mercadería a preparar agrupando todos los pickeos de la preparación.\n    • Repartir escasez:\n    • Respetar FIFO c/lote auto: permite preparar un producto sin respetar el FIFO si el mismo se encuentra en ubicación de picking.\n    • Priorizar desborde:\n    • Ctrl. stock DMTI/FAUCA:\n    • Prep. solo c/camión:\n    • Agrup. por camión:\n    • Ordenar pedidos por: criterio por el que se ordenan los pedidos.\n    • Clientes por preparación: cantidad de clientes por preparación.\n    • Solo pedidos nuevos: indica si se deben liberar sólamente pedidos nuevos.\n    • Excluir ubicaciones de picking: indica si se deben excluir las ubicaciones de picking al momento de la liberación. Si está activo sólo se consideran ubicaciones de stock.\n    • Excluir ubicaciones de stock: indica si se deben excluir las ubicaciones de stock al momento de la liberación. Si está activo sólo se consideran ubicaciones de picking.\n    • Empresa: empresa asociada a los pedidos liberados con la nueva regla.\n    • Predio: predio correspondiente a los pedidos liberados con la nueva regla.\n    • Onda: selección de la onda que se liberará con la nueva regla. Serán liberados sólamente los pedidos cuya ruta pertenezca a la onda seleccionada.\n    • Tipo de Agentes: selección del tipo de agente asociado a la nueva regla.\n    • Condición de liberación: se marcan las distintas condiciones necesarias de los pedidos para que se considere su liberación. Es un valor que pertenece a los pedidos y se utiliza para separar pedidos en la liberación de onda. En la selección de pedidos, sólo se muestran aquellos que tengan algunas de las condiciones seleccionadas.\n    • Tipos de Expedición: se marcan los tipos de expedición asociados a los pedidos de la onda.\n    • Tipos de Pedidos: se marcan los tipos de pedidos que se liberan en la onda.\nAl completar la configuración se debe presionar el botón 'Confirmar'. Esto creará la nueva regla, agregándola a la grilla del panel."
+    },
+    {
+        "role": "user",
+        "content": "Edición de Reglas de Liberación Automática"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nEdición de Reglas de Liberación Automática:\nPara editar los detalles de una regla de liberación automática o cambiar la configuración de liberación de la misma, se debe abrir el menú contextual correspondiente a la línea de la misma en la grilla del panel “Liberación automática”  y presionar el botón 'Editar'. Esto despliega un modal:\nEn este se podrán modificar los detalles propios de la regla, cambiando los campos deseados.\nAl cambiar los detalles deseados se debe presionar el botón 'Configuración de Liberación'. Esto despliega un modal:\nAl igual que en el modal anterior, en este se podrán cambiar los campos correspondientes a la configuración de liberación que se desean modificar.\nUna vez modificados los campos requeridos, se debe confirmar la edición presionando el botón 'Confirmar'."
+    },
+    {
+        "role": "user",
+        "content": "Ejecución Manual de Reglas de Liberación Automática"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nEjecución Manual de Reglas de Liberación Automática:\nLas reglas de liberación automática también tienen la opción de ejecutarse manualmente a través de la grilla del panel “Liberación automática”.\nPara poder ejecutar una regla, la misma debe de estar activa. Es decir, en la grilla, el valor del campo Activa de la misma debe de estar habilitado.\nPara ejecutar manualmente una regla, se debe abrir el menú contextual correspondiente a la línea de la misma y presionar el botón 'Ejecutar Regla'."
+    },
+    {
+        "role": "user",
+        "content": "Asignación de Agentes a Reglas de Liberación Automática"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nAsignación de Agentes a Reglas de Liberación Automática:\nPara asignar agentes a una regla de liberación automática, se debe abrir el menú contextual correspondiente a la línea de la misma en la grilla del panel “Liberación automática”  y presionar el botón 'Asignar Agentes'. Esto despliega un modal:\nAcá se deben seleccionar y pasar a la grilla situada a la derecha los agentes que se desean asociar a la regla.\nUna vez asignados los agentes se debe presionar el botón 'Cerrar'."
+    },
+    {
+        "role": "user",
+        "content": "Operaciones Avanzadas sobre Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nOperaciones Avanzadas sobre Contenedores:\nEn esta sección se presentan operativas avanzadas que pueden realizarse sobre los contenedores del sistema. Las secciones que se detallan a continuación son: Partición de Contenedores, Consolidación de Contenedores y Control de Contenedores."
+    },
+    {
+        "role": "user",
+        "content": "Partición de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPartición de Contenedores:\nEl sistema WIS permite reubicar la mercadería, originalmente preparada en un contenedor, a otro contenedor. Para ello, ofrece dos modalidades:\n    • Manual: el operario debe especificar inicialmente el contenedor del cual extraerá la mercadería y luego seleccionar la mercadería a extraer, detallando finalmente el contenedor destinatario de dicha mercadería.\n    • Guiada: el proceso es similar, pero en este caso, el sistema guía al operario en el orden en que se debe procesar la mercadería, sin permitirle escoger libremente qué mercadería movilizar. El operario debe confirmar si aprueba o no la reubicación de cada ítem según la guía del sistema."
+    },
+    {
+        "role": "user",
+        "content": "Partición Manual de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPartición Manual de Contenedores:\nLa partición manual de contenedores se realiza a través del colector “Partición”. Este se encuentra dentro del menú Manejo de Contenedores > Partición:\nEn esta pantalla se debe leer el contenedor a ser particionado en el campo Contenedor.\nLuego se leen los productos a ser transferidos de contenedor en el campo Lea Producto. Al leer un producto se redirige a la siguiente pantalla:\nEn esta pantalla se debe de ingresar la cantidad del producto que se desea extraer del contenedor. Esto se hace en el campo 'Cantidad a Extraer'.\nDespués, en el campo 'Contenedor destino', el sistema solicita la lectura del contenedor donde se transferirá la cantidad elegida del producto.\nSi el contenedor destino es nuevo, este quedará posicionado en la misma ubicación del contenedor original.\nSi el contenedor destino ya existe, este deberá pertenecer a la misma empresa, predio y cliente que el contenedor original. Además la agrupación de la preparación asociada a ambos contenedores debe ser la misma; los pedidos asociados a cada contenedor deben tener asignado el mismo valor para los campos 'Comparte contenedor picking' y 'Comparte contenedor entrega'.\nCuando las preparaciones no coinciden entre ambos contenedores, los detalles de picking de la preparación asociada al contenedor origen que se movilizan al contenedor destino son reasignados a la preparación asociada al contenedor destino.\nAl confirmarse el contenedor destino, el sistema vuelve a la pantalla anterior para la lectura de otro producto.\nEn caso de no existir más mercadería en el contenedor origen, este es removido del sistema y se muestra el siguiente mensaje: 'No hay más prodcutos en el contenedor XXXXX'.\nPara terminar la operativa cuando aún existen productos en el contenedor origen, se debe confirmar el campo 'Lea Producto' estando vacío."
+    },
+    {
+        "role": "user",
+        "content": "Partición Guiada de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPartición Guiada de Contenedores:\nLa partición guiada de contenedores se realiza a través del colector “Separación de Picking”. Este se encuentra dentro del menú Preparación > Separación de Picking:\nEn esta pantalla se debe leer el contenedor a ser particionado en el campo Contenedor.\nLuego se leen los productos a ser transferidos en el campo Producto.\nTras confirmar la lectura de un producto, se debe ingresar la cantidad del mismo que se desea extraer del contenedor. Esto se hace en el campo Cantidad.\nFinalmente, en el campo Nro. Contenedor Destino se debe ingresar el número del contenedor donde se transferirá la cantidad elegida del producto.\nSi el contenedor destino es nuevo, puede suceder lo siguiente:\n    • La preparación asociada al contenedor original no requiere ubicación: al contenedor destino se le asignará la ubicación del equipo utilizado por el operario.\n    • La preparación asociada al contenedor original requiere ubicación: el sistema solicitará ingresar una ubicación de tránsito para el contenedor destino en el campo Ubicación.\nSi el contenedor destino ya existe, este deberá pertenecer a la misma empresa, predio y cliente que el contenedor original. Además la agrupación de la preparación asociada a ambos contenedores debe ser la misma; los pedidos asociados a cada contenedor deben tener asignado el mismo valor para los campos Comparte contenedor picking y Comparte contenedor entrega.\nCuando las preparaciones no coinciden entre ambos contenedores, los detalles de picking de la preparación asociada al contenedor origen que se movilizan al contenedor destino son reasignados a la preparación asociada al contenedor destino.\nAl confirmar el contenedor destino, o su ubicación en caso de que se requiera, el sistema continuará con la lectura de otro producto.\nSi no existen más productos en el contenedor origen, este es removido del sistema y se muestra el siguiente mensaje: 'No hay productos en el contenedor XXXXX'.\nPara terminar la operativa cuando aún existen productos en el contenedor origen, se debe confirmar el campo Producto estando vacío."
+    },
+    {
+        "role": "user",
+        "content": "Consolidación de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nConsolidación de Contenedores:\nEl sistema WIS permite consolidar dos contenedores existentes. Cuando esto sucede, se unifica la mercadería de ambos contenedores en el contenedor destino y el contenedor origen es removido del sistema.\nPara poder consolidar dos contenedores, éstos deben pertenecer a la misma empresa, predio y cliente; la agrupación de la preparación asociada a ambos contenedores debe ser la misma; los pedidos asociados a cada contenedor deben tener asignado el mismo valor para el campo 'Comparte contenedor picking'.\nCuando las preparaciones no coinciden entre ambos contenedores, los detalles de picking de la preparación asociada al contenedor origen se reasignan a la preparación asociada al contenedor destino.\nLa consolidación de contenedores se lleva a cabo en el colector “Consolidación”. Este se encuentra dentro del menú Manejo de Contenedores > Consolidación:\nEn esta pantalla se debe leer el contenedor origen y destino en los campos Contenedor de origen y Contenedor de destino respectivamente.\nUna vez se confirma con S en el campo Confirmar (S/N)?, el sistema realiza la consolidación y muestra un mensaje como el siguiente: 'Todo el contenido del contenedor NNNN se movió al XXXX.'."
+    },
+    {
+        "role": "user",
+        "content": "Control de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nControl de Contenedores:\nEl sistema WIS permite a los operarios realizar auditorías sobre contenedores. Esta operativa se lleva a cabo en el colector “Control de Contenedores”. Este se encuentra dentro del menú Manejo de Contenedores > Control de Contenedores.\nEl primer campo que se debe completar en esta pantalla es Modalidad. En este se debe seleccionar una de las siguientes opciones:\n    • TOTAL PRODUCTO: el operario debe especificar, una a una, las cantidades de cada producto / lote.\n    • TOTAL: se audita la cantidad total de unidades en el contenedor, independientemente de los productos. Si existe diferencia el sistema pasa automáticamente a la modalidad TOTAL PRODUCTO."
+    },
+    {
+        "role": "user",
+        "content": "Modalidad TOTAL"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nModalidad TOTAL:\nSi se elige la modalidad TOTAL, se agrega el siguiente campo en el formulario:\nLo primero que se solicita al usuario es leer el contenedor a controlar en el campo 'Contenedor'.\nUna vez confirmado el contenedor, se debe ingresar la cantidad total de productos del mismo en el campo UNIDADES / TOTAL. Si la cantidad es la misma, el sistema finaliza el control del contenedor mostrando el siguiente mensaje: 'Fin del control para la preparación/cliente'.\nSi la cantidad ingresada es diferente a la del sistema, se continúa con la modalidad TOTAL PRODUCTO."
+    },
+    {
+        "role": "user",
+        "content": "Modalidad TOTAL PRODUCTO"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nModalidad TOTAL PRODUCTO:\nSi se elige la modalidad TOTAL PRODUCTO, se agregan los siguientes campos al formulario:\nTras confirmar la lectura del contenedor en el campo 'Contenedor', el operario debe comenzar a ingresar los productos y, si corresponde, los lotes en los campos 'Producto' y 'Lote' respectivamente.\nSi el producto leído maneja cajas, es decir, el campo “Unidad en bultos” del mismo es mayor a 1, se debe ingresar la cantidad de cajas en el campo 'CAJAS / UNIDAD CAJA'.\nLuego, se debe ingresar la cantidad del producto leído en el campo 'UNIDADES / TOTAL'.\nSi existe una diferencia por sobrante, el colector solicita la confirmación de la misma con un mensaje como el siguiente:\n'Atención! La cantidad controlada Excede lo pickeado. Ingresado: 5 Pickeado: 1 Diferencia: 4. Desea confirmar?'\nSi se confirma la diferencia, el sistema redirige a la siguiente pantalla:\nEn este formulario, primero se debe seleccionar un motivo de diferencia en el campo Motivo.\nLuego, si corresponde, se deberá ingresar el lote del producto con diferencia en el campo Lote.\nPor último, se solicitará la lectura de una etiqueta de transferencia en el campo Etiqueta de transferencia, donde quedará asignada la cantidad sobrante del producto.\nDependiendo si la ubicación donde se produjo el picking cuenta con stock disponible para poder justificar dicho sobrante, al confirmarse el mismo, el sistema reduce el stock sobre la ubicación del picking por una cantidad igual al sobrante, y se le adjudica a la ubicación del equipo utilizado para la transferencia.\nEn caso que la ubicación donde se produjo el picking no cuente con el stock disponible para justificar todo el sobrante, se genera un ajuste de stock automáticamente por el fragmento no justificable sobre la ubicación del equipo y con el fragmento justificable se procede como se detalló previamente.\nTras confirmar la etiqueta de transferencia, se continúa con el control de los demás productos.\nSi se vuelve a leer un producto ya controlado, se habilita el campo Tipo de operación. En este campo se deberá elegir una de las siguientes opciones:\n    • SUMAR: suma la cantidad ingresada a la controlada anteriormente.\n    • REMPLAZAR: reemplaza la cantidad controlada anteriormente por la ingresada.\n    • RESTAR: resta la cantidad ingresada a la controlada anteriormente.\n    • CANCELAR: cancela el control del producto leído para continuar con el siguiente.\nUna vez controlados todos los productos del contenedor, se deberá finalizar el control ingresando el valor 0 en el campo Producto.\nEn caso de no existir faltantes al finalizar el control se muestra un mensaje como el siguiente: 'Se cerró el contenedor XXXX'.\nDe existir faltantes o productos pendientes de controlar al momento de la finalización del control, el colector redirige a una siguiente pantalla:\nEn la tabla de esta pantalla se muestran los productos con diferencia o pendientes de controlar.\nAl confirmar el cierre del contenedor se muestra un formulario:\nEn éste se debe confirmar cada una de las diferencias, ingresando un motivo en el campo 'Motivo'.\nTras confirmar la diferencia del último producto, se cerrará el contenedor mostrando un mensaje como el siguiente: 'El contenedor XXXX fue cerrado con diferencias'.\nEn caso de existir diferencias por faltante, tras confirmarse las mismas, la diferencia de stock se retorna a la ubicación donde se produjo el picking, quedando dicha cantidad reservada en la ubicación y pendiente de ser preparada en el detalle de picking correspondiente."
+    },
+    {
+        "role": "user",
+        "content": "Facturación"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nFacturación:\nWIS cuenta con un módulo de facturación que se encarga de realizar cálculos de subtotales basados en la operativa para alimentar un sistema de facturación externo. WIS no se ocupa de la facturación como tal (por ejemplo, el cálculo de impuestos), sino que solamente disponibiliza dichos subtotales para que el sistema de facturación externo realice la facturación propiamente dicha.\nPara ello, WIS maneja un conjunto de códigos de facturación estándar (ej. facturación basada en la cantidad de unidades recibidas) y está diseñado para ser extendido con códigos de facturación personalizados mediante el desarrollo de plugins.\nLa información detallada sobre este módulo se encuentra en el documento 'Módulo Facturación'."
+    },    
+    {
+        "role": "user",
+        "content": "Descarga de Contenedores"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nDescarga de Contenedores:Cuando un camión o egreso aún no está cerrado, se tiene la opción de descargar sus contenedores. Esto se realiza en el colector “Descarga de Contenedores”. Para ingresar al mismo hay que dirigirse al menú Manejo de Contenedores > Descarga de Contenedores.En esta pantalla se debe de leer el contenedor a descargar del camión en el campo Contenedor.Una vez leído el contenedor, para confirmar su descarga, se deberá leer una ubicación de tránsito donde se alojará el mismo. Esta ubicación de tránsito se ingresa en el campo Ubicación."
+    },
+    {
+        "role": "user",
+        "content": "Pedidos de Mostrador"
+    },
+    {
+        "role": "assistant",
+        "content": "Según el Manual Avanzado de Usuario WMS 10.0: \nPedidos de Mostrador:\nWIS permite facturar y expedir contenedores de forma administrativa. Esto se hace a través del panel “Pedidos de Mostrador”. Para ingresar a esta pantalla, se debe tener seleccionado un predio en la cabecera del panel. En caso contrario el sistema muestra un mensaje indicándoselo al usuario.\nEl ingreso al panel “Pedidos de Mostrador” se lleva a cabo a través del menú 'Expedición > Pedidos de Mostrador' como se describe a continuación:\nEn esta pantalla se debe ingresar el código de barras de un contenedor en el campo Nro. Contenedor.\nEn caso de que el contenedor esté asociado a una preparación manual por pedido o libre, la misma debe estar finalizada para poder utilizarlo en este panel. Además, el contenedor debe tener situación CONTENEDOR EN PREPARACION y el mismo no puede estar asignado a ningún egreso.\nAl confirmarse el código del contenedor, el sistema maneja en segundo plano un registro temporal del pedido asociado al contenedor, que se utiliza para las distintas operaciones de este panel. Además, en la pantalla se presentan datos informativos del contenedor y se cargan las grillas de la siguiente manera:\n    • Grilla de contenedores no incluídos: situada a la derecha de los datos del contenedor. Esta grilla muestra todos los contenedores del pedido que no están en el registro temporal.\n    • Grilla de contenedores incluídos: situada inmediatamente por debajo de los datos del contenedor. Presenta los contenedores del pedido que se encuentran en el registro temporal.\n    • Grilla de detalles: situada debajo de la grilla de contenedores incluídos, se muestra y oculta presionando el botón 'Detalles'. Muestra los detalles preparados del pedido, ya sea en el contenedor leído o en otro contenedor. Las líneas de detalle que están en un contenedor incluido en el registro temporal se resaltan en color verde.\nLas tres grillas utilizan el pedido relacionado con el contenedor leído para filtrar su contenido.\nA continuación se detallan las acciones que se pueden realizar sobre el contenedor, utilizando los botones presentes en este panel:\n    • Facturar: Crea un camión (egreso) ficticio y lo marca como facturado. Funciona de igual manera que la operación Facturar egreso, presente en “Panel de egresos” (operativa documentada en el “Manual Básico de Usuario”).\n    • Expedir: Simula la carga del contenedor al camión ficticio generado al Facturar y realiza el cierre del mismo. Se da de baja el stock y se cambian los estados del contenedor y del camión, tal cual sucede en la operativa de expedición (documentada en el “Manual Básico de Usuario”). Por último borra el registro temporal manejado por el sistema.\n    • Descartar: Limpia las grillas y los datos del contenedor del formulario. También elimina el registro temporal manejado por el sistema si no se utilizó la opción Facturar."
+    }
+]
