@@ -46,6 +46,14 @@ En esta carpeta se encuentran varios scripts que utilizamos para automatizar tar
 
 ---
 
+## **`Copia de Llama-3.1 8b + Unsloth 2x faster finetuning.ipynb`**
+- **Descripción**: Es un archivo de jupyter notebook que ejecutamos en la plataforma google colab para hacer fine tuning al modelo, en este caso se llam "copia de" porque el script original fue proporcionado por Unsloth y modificado por nosotros para que se adapte a nuestro dataset.
+
+- **Link en google colab**: [https://colab.research.google.com/drive/1JczBDkEwK0obWbuoOqf2cezcVuGgfn6b?usp=sharing](https://colab.research.google.com/drive/1JczBDkEwK0obWbuoOqf2cezcVuGgfn6b?usp=sharing)
+- **Link del repositorio de Unsloth**: [https://github.com/unslothai/unsloth](https://github.com/unslothai/unsloth)
+
+---
+
 ## Archivos Generados
 - **`assistant_responses.txt`**: Archivo de texto que contiene todas las respuestas ordenadas del `assistant`.
 - **`DATASETS/`**: Contiene los datasets generados por los scripts anteriores.
