@@ -1,38 +1,49 @@
-import chromadb
-import requests
-from typing import List, Dict
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-BASE_URL = "http://localhost:1234"
-DB_FOLDER = "db"
+# Configuración
+TEXT_EMBEDDING_MODEL = "BAAI/bge-m3"
+VECTOR_DB_PATH = "db"
+VECTOR_DB_NAME = "WMS_VectorDB"
 
-def get_embeddings(texts: List[str]) -> List[List[float]]:
-    url = f"{BASE_URL}/v1/embeddings"
-    headers = {"Content-Type": "application/json"}
-    data = {
-        "model": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
-        "input": texts
-    }
-    response = requests.post(url, headers=headers, json=data)
-    response.raise_for_status()
-    return [item["embedding"] for item in response.json()["data"]]
+# Inicializa el modelo de embeddings y Chroma
+text_embedder = HuggingFaceEmbeddings(model_name=TEXT_EMBEDDING_MODEL)
+vector_db = Chroma(
+    persist_directory=VECTOR_DB_PATH,
+    embedding_function=text_embedder,
+    collection_name=VECTOR_DB_NAME
+)
 
-def find_relevant_context(query: str, top_k: int = 3) -> str:
-    chroma_client = chromadb.PersistentClient(path=DB_FOLDER)
-    collection = chroma_client.get_collection("wms_knowledge_base")
+def find_relevant_context(query, n_results=5, max_tokens=3000):
+    # Busca los documentos más relevantes en la base de datos
+    results = vector_db.similarity_search_with_score(query, k=n_results)
     
-    query_embedding = get_embeddings([query])[0]
+    # Ordena los resultados por puntuación (de mayor a menor relevancia)
+    sorted_results = sorted(results, key=lambda x: x[1], reverse=True)
     
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=top_k
+    # Inicializa el contexto y el contador de tokens
+    context_parts = []
+    token_count = 0
+    
+    # Agrega documentos al contexto hasta alcanzar el límite de tokens
+    for doc, score in sorted_results:
+        doc_tokens = len(doc.page_content.split())
+        if token_count + doc_tokens > max_tokens:
+            break
+        context_parts.append(f"Relevancia: {score:.4f}\n{doc.page_content}")
+        token_count += doc_tokens
+    
+    # Une los documentos del contexto
+    full_context = "\n\n---\n\n".join(context_parts)
+    
+    return full_context
+
+def split_context(context, max_tokens=2000):
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=max_tokens,
+        chunk_overlap=100,
+        length_function=len
     )
-    
-    relevant_context = "\n\n".join(results['documents'][0])
-    return relevant_context
-
-def augment_prompt_with_context(messages: List[Dict[str, str]], context: str) -> List[Dict[str, str]]:
-    system_message = messages[0]
-    augmented_content = f"{system_message['content']}\n\nRelevant context:\n{context}"
-    augmented_system_message = {"role": "system", "content": augmented_content}
-    return [augmented_system_message] + messages[1:]
+    return text_splitter.split_text(context)
 

@@ -1,93 +1,79 @@
-import os
+from os import listdir
+from os.path import isfile, join
+from tqdm import tqdm
 import chromadb
-import logging
-import requests
-from typing import List, Dict
-import docx
-import PyPDF2
+from pypdf import PdfReader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
 
-# Configuration
-DATA_FOLDER = "data"
-DB_FOLDER = "db"
-BASE_URL = "http://localhost:1234"
+# Configuración
+TEXT_EMBEDDING_MODEL = "BAAI/bge-m3"
+VECTOR_DB_NAME = "WMS_VectorDB"
+VECTOR_DB_PATH = "db/"
+CHUNK_SIZE = 800
+OVERLAP = 50
 
-# Logging configuration
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+docs_path = "data/"
+file_names = [f for f in listdir(docs_path) if isfile(join(docs_path, f))]
 
-def get_embeddings(texts: List[str]) -> List[List[float]]:
-    url = f"{BASE_URL}/v1/embeddings"
-    headers = {"Content-Type": "application/json"}
-    data = {
-        "model": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
-        "input": texts
-    }
-    response = requests.post(url, headers=headers, json=data)
-    response.raise_for_status()
-    return [item["embedding"] for item in response.json()["data"]]
+# Inicializa Chroma y el modelo de embeddings
+chroma_client = chromadb.PersistentClient(path=VECTOR_DB_PATH)
+collection = chroma_client.get_or_create_collection(name=VECTOR_DB_NAME)
+existing_ids = set(collection.get(ids=None)["ids"])
 
-def read_text_file(file_path: str) -> str:
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return file.read()
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=CHUNK_SIZE,
+    chunk_overlap=OVERLAP
+)
 
-def read_docx_file(file_path: str) -> str:
-    doc = docx.Document(file_path)
-    return "\n".join([paragraph.text for paragraph in doc.paragraphs])
+text_embedder = HuggingFaceEmbeddings(model_name=TEXT_EMBEDDING_MODEL)
 
-def read_pdf_file(file_path: str) -> str:
-    with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        return "\n".join([page.extract_text() for page in reader.pages])
+def write_to_db(filename):
+    if not filename.endswith(".pdf"):
+        print(f"Skipping non-PDF file: {filename}")
+        return  # Salta el archivo si no es un PDF
 
-def process_file(file_path: str) -> List[Dict[str, str]]:
-    _, file_extension = os.path.splitext(file_path)
-    
-    if file_extension == '.txt':
-        content = read_text_file(file_path)
-    elif file_extension == '.docx':
-        content = read_docx_file(file_path)
-    elif file_extension == '.pdf':
-        content = read_pdf_file(file_path)
+    print(f"Procesando archivo PDF: {filename}")
+    doc = PdfReader(docs_path + filename)
+    doc_text = "".join([page.extract_text() for page in doc.pages])
+
+    # Divide el texto en chunks
+    chunks = text_splitter.split_text(doc_text)
+
+    # Genera y guarda los embeddings en la base de datos
+    for i, chunk in enumerate(chunks):
+        doc_id = f"{filename}_{i}"
+        if doc_id not in existing_ids:
+            embedding = text_embedder.embed_query(chunk)
+            collection.add(
+                embeddings=[embedding],
+                documents=[chunk],
+                ids=[doc_id]
+            )
+    print(f"Archivo PDF {filename} procesado con éxito.")
+
+def process_text_file(filename):
+    print(f"Procesando archivo TXT: {filename}")
+    with open(docs_path + filename, "r", encoding="utf-8") as file:
+        text = file.read()
+
+    # Divide el texto en chunks
+    chunks = text_splitter.split_text(text)
+    for i, chunk in enumerate(chunks):
+        doc_id = f"{filename}_{i}"
+        if doc_id not in existing_ids:
+            embedding = text_embedder.embed_query(chunk)
+            collection.add(
+                embeddings=[embedding],
+                documents=[chunk],
+                ids=[doc_id]
+            )
+    print(f"Archivo TXT {filename} procesado con éxito.")
+
+for filename in file_names:
+    if filename.endswith(".pdf"):
+        write_to_db(filename)
+    elif filename.endswith(".txt"):
+        process_text_file(filename)
     else:
-        logger.warning(f"Unsupported file type: {file_path}")
-        return []
-
-    paragraphs = content.split('\n\n')
-    return [{"content": p, "source": file_path} for p in paragraphs if p.strip()]
-
-def create_vector_database():
-    # Connect to ChromaDB
-    chroma_client = chromadb.PersistentClient(path=DB_FOLDER)
-    
-    # Create or get the collection
-    collection = chroma_client.get_or_create_collection("wms_knowledge_base")
-
-    # Process all files in the data folder
-    all_documents = []
-    for root, _, files in os.walk(DATA_FOLDER):
-        for file in files:
-            file_path = os.path.join(root, file)
-            all_documents.extend(process_file(file_path))
-
-    # Batch process documents
-    batch_size = 100
-    for i in range(0, len(all_documents), batch_size):
-        batch = all_documents[i:i+batch_size]
-        
-        texts = [doc["content"] for doc in batch]
-        embeddings = get_embeddings(texts)
-        
-        collection.add(
-            embeddings=embeddings,
-            documents=[doc["content"] for doc in batch],
-            metadatas=[{"source": doc["source"]} for doc in batch],
-            ids=[f"doc_{j}" for j in range(i, i+len(batch))]
-        )
-        
-        logger.info(f"Processed {i+len(batch)} documents")
-
-    logger.info("Vector database creation completed")
-
-if __name__ == "__main__":
-    create_vector_database()
-
+        print(f"Tipo de archivo no compatible: {filename}")

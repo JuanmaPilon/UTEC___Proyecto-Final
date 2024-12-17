@@ -66,7 +66,7 @@ def remake_answer(message_index):
     new_answer = response.get("choices")[0].get("message").get("content")
     
     # Formatear la nueva respuesta
-    formatted_response = new_answer.replace("\\n", "\n").strip()
+    formatted_response = new_answer.replace("\n", "\n").strip()
     
     # Actualizar la respuesta en el historial de mensajes
     st.session_state.messages[message_index]["content"] = formatted_response
@@ -95,7 +95,7 @@ if prompt := st.chat_input("Escribe tu mensaje aquí..."):
     logging.debug(f"Respuesta bruta del asistente: {assistant_response}")
     
     # Formatear respuesta para mostrar correctamente saltos de línea
-    formatted_response = assistant_response.replace("\\n", "\n").strip()
+    formatted_response = assistant_response.replace("\n", "\n").strip()
     display_message("assistant", formatted_response, len(st.session_state.messages))
 
     # Añade la respuesta del asistente a la lista de mensajes
