@@ -25,6 +25,8 @@ pip install requests
 pip install chromadb
 pip install pypdf2
 pip install python-docx
+pip install --upgrade langchain langchain-core langchain-community
+pip install langchain-huggingface
 ```
 
 ### Método 2: Usando `requirements.txt`
