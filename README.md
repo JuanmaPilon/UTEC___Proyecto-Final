@@ -20,13 +20,25 @@ Descarga e instala Python desde la página oficial: [https://www.python.org/down
 ### Método 1: Instalación manual
 Instala las siguientes bibliotecas de Python una por una:
 ```bash
-pip install streamlit
-pip install requests
-pip install chromadb
-pip install pypdf2
-pip install python-docx
-pip install --upgrade langchain langchain-core langchain-community
-pip install langchain-huggingface
+pip install chromadb==0.5.20
+pip install streamlit==1.38.0
+pip install python-docx==1.1.2
+pip install pypdf==5.1.0
+pip install PyPDF2==3.0.1
+pip install langchain==0.3.12
+pip install langchain-community==0.3.12
+pip install langchain-huggingface==0.1.2
+pip install langchain-chroma==0.1.4
+pip install langchain-core==0.3.25
+pip install langchain-openai==0.1.14
+pip install langchain-text-splitters==0.3.3
+pip install langchainhub==0.1.21
+pip install sentence-transformers==2.7.0
+pip install torch==2.4.1
+pip install tqdm==4.66.5
+pip install requests==2.32.3
+pip install numpy==1.26.4
+pip install scikit-learn==1.5.2
 ```
 
 ### Método 2: Usando `requirements.txt`
